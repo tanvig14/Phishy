@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <script type="text/javascript">
+
+     $(document).ready(function() {
+      $("#submiturl").click(function () {
+        var ingredient = $("#url").val();
+
+
+        var request = $.ajax({
+          url: "http://127.0.0.1:5000/results/",
+          method: "GET",
+          dataType: "json",
+        });
+
+        request.done (function (msg) {
+          alert("data transfer complete!");
+          console.log(msg);
+        });
+
+        request.fail (function (jqXHR, testStatus) {
+          alert("data transfer failed!");
+        });
+
+      });
+
+     });
+   </script>
+
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <header>
+      </header>
+      <label>Enter Link</label>
+      <p><input type="text" id="url" /></p>
+      <p><input type="submit" id="submiturl"/></p>
+
+
+      </div>
+      <div class="one-half column cocktaillist" style="margin-top: 25%">
+        <p><!--coctail list will display here--></p>
+
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
