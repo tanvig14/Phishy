@@ -12,11 +12,11 @@ def home():
 def results():
 
     requestData = request.args
-    print(requestData.get("url"))
+    url = requestData.get("url")
+    print(url)
 
     result = [
-    {'Id': 0,
-     'Link': '',
+    {'Link': url,
      'Result': '',
      'Confidence Score': '',}
     ]
