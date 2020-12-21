@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Phishy </title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -31,37 +31,15 @@
 </head>
 <body>
 
-  <!-- Primary Page Layout
+  <!-- Importing Ajax
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Importing Java Script to Call the API
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="apiCall.js" type="text/javascript"></script>
 
-   <script type="text/javascript">
-
-     $(document).ready(function() {
-      $("#submiturl").click(function () {
-        var ingredient = $("#url").val();
-
-
-        var request = $.ajax({
-          url: "http://127.0.0.1:5000/results/",
-          method: "GET",
-          dataType: "json",
-        });
-
-        request.done (function (msg) {
-          alert("data transfer complete!");
-          console.log(msg);
-        });
-
-        request.fail (function (jqXHR, testStatus) {
-          alert("data transfer failed!");
-        });
-
-      });
-
-     });
-   </script>
-
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
@@ -70,12 +48,10 @@
       <label>Enter Link</label>
       <p><input type="text" id="url" /></p>
       <p><input type="submit" id="submiturl"/></p>
-
-
       </div>
+      
       <div class="one-half column cocktaillist" style="margin-top: 25%">
         <p><!--coctail list will display here--></p>
-
       </div>
     </div>
   </div>
