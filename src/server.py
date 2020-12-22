@@ -1,5 +1,6 @@
 import flask
 from flask import jsonify, request
+from extract import extractAllFeatures
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -8,7 +9,7 @@ app.config["DEBUG"] = True
 def home():
     return "<h1>Looks Like the API is working just fine!</h1><p>This site is a prototype API for phishing detection</p>"
 
-@app.route('/results', methods=["GET"])
+@app.route('/results/', methods=["GET"])
 def results():
     """
     Uses the API call to pass the URL through the model and returns a JSON with the passed URL, the result as determined 
@@ -21,13 +22,13 @@ def results():
     requestData = request.args
     url = requestData.get("url")
     print(url)
+    features = extractAllFeatures(url)
 
     result = [
     {'URL': url,
      'Result': '',
      'Confidence Score': '',}
     ]
-
     toReturn = jsonify(result)
     toReturn.headers.add('Access-Control-Allow-Origin', '*')
     return toReturn

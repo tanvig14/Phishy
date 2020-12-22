@@ -1,10 +1,6 @@
 from urllib.parse import urlparse
 import requests
 
-URL = "https://www.youtube.com/?gl=IN"
-elements = urlparse(URL)
-
-
 features = {
     "having_IP_Address": 0,
     "port": 0,
@@ -15,6 +11,8 @@ features = {
     "Redirect": 0,
     "HTTPS_token": 0,
     "Shortining_Service": 0,
+    "having_Sub_Domain": 0,
+    "having_IP_Address": 0,
 }
 
 ports = {
@@ -32,7 +30,6 @@ ports = {
 
 def extractPort():
     port = ports[elements.scheme]
-    print(port)
     ## Wait till we implement pure URL features
 
 def extractUrlLength():
@@ -126,13 +123,66 @@ def extractShortiningService():
     else:
         features["Shortining_Service"] = 1
 
+def extractHavingSubDomain():
+    """
+    Sets the having_Sub_Domain feature after checking how many sub-domains the hostname has.
+    This number include the "www." prefix and the top level domain like ".com" or ".uk"
 
-extractPort()
-extractAtSymbol()
-extractUrlLength()
-extractDoubleSlashRedirecting()
-extractPrefixSuffix()
-extractRedirects()
-extractHttpsToken()
-extractShortiningService()
-print(features)
+    1) -1 if the hostname has more than 3 parts after splitting along '.' ie "www." + some name + ".com". 
+    2) 1 if the hostname has 3 or fewer parts after splitting along '.'
+    """
+
+    list = elements.hostname.split(".")
+    if len(list) > 3:
+        features["having_Sub_Domain"] = -1
+    else:
+        features["having_Sub_Domain"] = 1
+
+def extractHavingIpAdress():
+    parts = elements.netloc.split('.')
+
+    # Number of times a number appears in the domain
+    countNum = 0
+
+    # Numver of times a hexadecimal appears in the domain
+    countHex = 0
+
+    # Number of times a 'Normal' string appears in the domain
+    countNormal = 0
+
+    for part in parts:
+        if part.isdigit():
+            countNum = countNum + 1
+        else:
+            try:
+                int(part, 16)
+                countHex = countHex + 1
+            except ValueError:
+                countNormal = countNormal + 1
+    
+    if countNum + countHex > 0:
+        features["having_IP_Address"] = -1
+    else:
+        features["having_IP_Address"] = 1
+
+def extractAllFeatures(url):
+    global URL 
+    global elements
+    URL = url
+    elements = urlparse(URL)
+    extractPort()
+    extractAtSymbol()
+    extractUrlLength()
+    extractDoubleSlashRedirecting()
+    extractPrefixSuffix()
+    extractRedirects()
+    extractHttpsToken()
+    extractShortiningService()
+    extractHavingSubDomain()
+    extractHavingIpAdress()
+    extractHavingIpAdress()
+    print(features)
+    return features
+
+link = "https://www.youtube.com/watch?v=8OpMAlYyH5Y"
+extractAllFeatures(link)
