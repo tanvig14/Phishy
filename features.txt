@@ -1,13 +1,13 @@
 0             having_IP_Address 
 1                    URL_Length Done
-2            Shortining_Service
+2            Shortining_Service Done
 3              having_At_Symbol Done
-4      double_slash_redirecting
-5                 Prefix_Suffix
+4      double_slash_redirecting Done
+5                 Prefix_Suffix Done
 6             having_Sub_Domain
 10                         port
-11                  HTTPS_token
-18                     Redirect
+11                  HTTPS_token Done
+18                     Redirect Done
 
 API calls
 17                 Abnormal_URL
