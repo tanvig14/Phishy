@@ -1,0 +1,36 @@
+0             having_IP_Address 
+1                    URL_Length Done
+2            Shortining_Service
+3              having_At_Symbol Done
+4      double_slash_redirecting
+5                 Prefix_Suffix
+6             having_Sub_Domain
+10                         port
+11                  HTTPS_token
+18                     Redirect
+
+API calls
+17                 Abnormal_URL
+23                age_of_domain
+24                    DNSRecord
+25                  web_traffic
+
+Find more info
+26                    Page_Rank
+27                 Google_Index
+28       Links_pointing_to_page
+29           Statistical_report
+
+Needs HTML inspection
+7                SSLfinal_State
+8   Domain_registeration_length
+9                       Favicon
+12                  Request_URL
+13                URL_of_Anchor
+14                Links_in_tags
+15                          SFH
+16          Submitting_to_email
+19                 on_mouseover
+20                   RightClick
+21                  popUpWidnow
+22                       Iframe

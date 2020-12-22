@@ -10,13 +10,20 @@ def home():
 
 @app.route('/results', methods=["GET"])
 def results():
+    """
+    Uses the API call to pass the URL through the model and returns a JSON with the passed URL, the result as determined 
+    by the Model and a confidence score. 
+
+    Returns:
+        [JSON String]: [Contains the orignal URL, the models result and a confidence score]
+    """
 
     requestData = request.args
     url = requestData.get("url")
     print(url)
 
     result = [
-    {'Link': url,
+    {'URL': url,
      'Result': '',
      'Confidence Score': '',}
     ]
