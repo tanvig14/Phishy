@@ -1,7 +1,9 @@
 from urllib.parse import urlparse
 import requests
 import socket
-import ssl                    
+import ssl  
+import OpenSSL
+              
 
 features = {
     "having_IP_Address": 0,
@@ -15,6 +17,7 @@ features = {
     "Shortining_Service": 0,
     "having_Sub_Domain": 0,
     "having_IP_Address": 0,
+    "SSLfinal_State": 0,
 }
 
 ports = {
@@ -190,6 +193,17 @@ def extractHavingIpAdress():
     else:
         features["having_IP_Address"] = 1
 
+def extractSSLFinalState():
+    trustedIssuers = ["GeoTrust", "GoDaddy", "Network Solutions", "Thawte", "Comodo", "Doster", "VeriSign"]
+    if elements.scheme == "https":
+        certString = ssl.get_server_certificate((socket.gethostbyname(elements.netloc),443))
+        x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, certString)
+        print(x509.get_notAfter())
+        print(x509.get_issuer())
+    else:
+        features["SSLfinal_State"] = -1
+
+
 def extractAllFeatures(url):
     """
     Takes a URL and extracts all the features required for classification.
@@ -204,7 +218,7 @@ def extractAllFeatures(url):
     global elements
     URL = url
     elements = urlparse(URL)
-
+    print(elements)
     extractPort()
     extractAtSymbol()
     extractUrlLength()
@@ -216,8 +230,10 @@ def extractAllFeatures(url):
     extractHavingSubDomain()
     extractHavingIpAdress()
     extractHavingIpAdress()
+    extractSSLFinalState()
     print(features)
     return features
 
-link = "https://www.youtube.com/watch?v=8OpMAlYyH5Y"
+link = "https://www.youtube.com/watch?v=_tNU6dpjIyM"
+link1 = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
 extractAllFeatures(link)
