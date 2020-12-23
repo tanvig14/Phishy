@@ -5,7 +5,7 @@
 4      double_slash_redirecting Done
 5                 Prefix_Suffix Done
 6             having_Sub_Domain Done
-10                         port
+10                         port Done
 11                  HTTPS_token Done
 18                     Redirect Done
 

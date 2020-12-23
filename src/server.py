@@ -21,7 +21,6 @@ def results():
 
     requestData = request.args
     url = requestData.get("url")
-    print(url)
     features = extractAllFeatures(url)
 
     result = [
@@ -32,6 +31,5 @@ def results():
     toReturn = jsonify(result)
     toReturn.headers.add('Access-Control-Allow-Origin', '*')
     return toReturn
-
 
 app.run()

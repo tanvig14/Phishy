@@ -1,5 +1,7 @@
 from urllib.parse import urlparse
 import requests
+import socket
+import ssl                    
 
 features = {
     "having_IP_Address": 0,
@@ -29,12 +31,30 @@ ports = {
 }
 
 def extractPort():
-    port = ports[elements.scheme]
-    ## Wait till we implement pure URL features
+    """
+    [Active] Sets the port feature based on port status.
+
+    1) -1 if any port except 80(http) and 443(https) are open.
+    2) 1 if no port except 80(http) and 443(https) are open.
+    """
+   
+    for port in ports:
+
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(0.5)  
+        IP = socket.gethostbyname(elements.netloc)
+        result = sock.connect_ex((IP,ports[port]))
+
+        if (ports[port] != 80 and ports[port] != 443) and (result == 0):
+            features['port'] = -1
+            break
+
+        else:
+            features['port'] = 1
 
 def extractUrlLength():
     """
-    Sets the URL_Length feature with the threshold value of 54.
+    [Passive] Sets the URL_Length feature with the threshold value of 54.
 
     1) -1 if the length is greater than or equal to 54.
     2) 1 if the length is less than 54.
@@ -47,7 +67,7 @@ def extractUrlLength():
 
 def extractAtSymbol():
     """
-    Sets the having_At_Symbol feature based on the presence of @ in the URL
+    [Passive] Sets the having_At_Symbol feature based on the presence of @ in the URL
 
     1) -1 if the URL contains @
     2) 1 if the URL does not contain @
@@ -60,7 +80,7 @@ def extractAtSymbol():
 
 def extractDoubleSlashRedirecting():
     """
-    Sets the double_slash_redirecting feature based on the position of the last //.
+    [Passive] Sets the double_slash_redirecting feature based on the position of the last //.
 
     1) -1 if the last occuring // is after the 6th index.
     2) 1 if the last occuring // is before the 6th index.
@@ -73,7 +93,7 @@ def extractDoubleSlashRedirecting():
 
 def extractPrefixSuffix():
     """
-    Sets the Prefix_Suffix feature after checking if the domain(netloc) comtains a -.
+    [Passive] Sets the Prefix_Suffix feature after checking if the domain(netloc) comtains a -.
 
     1) -1 if the domain(netloc) contains a -.
     2) 1 if the domain(netloc) does not contain a -.
@@ -86,7 +106,7 @@ def extractPrefixSuffix():
 
 def extractRedirects():
     """
-    Sets the Redirect feature after checking if the URL redirects to a different URL.
+    [Active] Sets the Redirect feature after checking if the URL redirects to a different URL.
 
     1) -1 if more than one redirects take place.
     2) 1 if less than or equal to 1 redirects take place.
@@ -100,19 +120,19 @@ def extractRedirects():
 
 def extractHttpsToken():
     """
-    Sets the HTTPS_token feature after checking if the domain starts with https or http.
+    [Passive] Sets the HTTPS_token feature after checking if the domain starts with https or http.
 
     1) -1 if the domain begins with https or http.
     2) 1 if the domain does not begin with https or http.
     """
-    if elements.netloc.startswith("https") or elements.netloc.startswith("http"):
+    if "https" in elements.netloc or elements.netloc.startswith("http"):
         features["HTTPS_token"] = -1
     else:
         features["HTTPS_token"] = 1
 
 def extractShortiningService():
     """
-    Sets the Shortining_Service feature after checking if the domain starts with one of the popular link shortening websites.
+    [Passive] Sets the Shortining_Service feature after checking if the domain starts with one of the popular link shortening websites.
 
     1) -1 if the domain begins with a link shortening domain.
     2) 1 if the domain does not begin with a link shortening domain.
@@ -125,7 +145,7 @@ def extractShortiningService():
 
 def extractHavingSubDomain():
     """
-    Sets the having_Sub_Domain feature after checking how many sub-domains the hostname has.
+    [Passive] Sets the having_Sub_Domain feature after checking how many sub-domains the hostname has.
     This number include the "www." prefix and the top level domain like ".com" or ".uk"
 
     1) -1 if the hostname has more than 3 parts after splitting along '.' ie "www." + some name + ".com". 
@@ -140,7 +160,7 @@ def extractHavingSubDomain():
 
 def extractHavingIpAdress():
     """
-    Sets the having_IP_Address feature after checking if the domain resembles an IP adress.
+    [Passive] Sets the having_IP_Address feature after checking if the domain resembles an IP adress.
 
     1) -1 if the domain resembles an IP Address in integer or hexadecimal form.
     2) 1 if the domain does not resemble an IP Address in integer or hexadecimal form.
@@ -171,10 +191,20 @@ def extractHavingIpAdress():
         features["having_IP_Address"] = 1
 
 def extractAllFeatures(url):
+    """
+    Takes a URL and extracts all the features required for classification.
+
+    Args:
+        url (String): A string storing the URL.
+
+    Returns:
+        [dictionary]: A dictionary containing all the features for the given URL.
+    """
     global URL 
     global elements
     URL = url
     elements = urlparse(URL)
+
     extractPort()
     extractAtSymbol()
     extractUrlLength()
