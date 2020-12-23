@@ -139,14 +139,19 @@ def extractHavingSubDomain():
         features["having_Sub_Domain"] = 1
 
 def extractHavingIpAdress():
+    """
+    Sets the having_IP_Address feature after checking if the domain resembles an IP adress.
+
+    1) -1 if the domain resembles an IP Address in integer or hexadecimal form.
+    2) 1 if the domain does not resemble an IP Address in integer or hexadecimal form.
+    """
+
     parts = elements.netloc.split('.')
 
     # Number of times a number appears in the domain
     countNum = 0
-
     # Numver of times a hexadecimal appears in the domain
     countHex = 0
-
     # Number of times a 'Normal' string appears in the domain
     countNormal = 0
 
