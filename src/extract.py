@@ -3,7 +3,9 @@ import requests
 import socket
 import ssl  
 import OpenSSL
-              
+import time
+import datetime
+import whois             
 
 features = {
     "having_IP_Address": 0,
@@ -18,6 +20,8 @@ features = {
     "having_Sub_Domain": 0,
     "having_IP_Address": 0,
     "SSLfinal_State": 0,
+    "age_of_domain": 0,
+    "Domain_registration_length": 0,
 }
 
 ports = {
@@ -194,15 +198,77 @@ def extractHavingIpAdress():
         features["having_IP_Address"] = 1
 
 def extractSSLFinalState():
+    """
+    [Active] Sets the SSLfinal_State feature after checking the SSL certificate.
+
+    1) -1 if the SSL certificate is less than 12 months old or expires in less than 12 months.
+    2) 1 if the SSL certificate is more than 12 months old and expires in more than 12 months.
+    """
+
     trustedIssuers = ["GeoTrust", "GoDaddy", "Network Solutions", "Thawte", "Comodo", "Doster", "VeriSign"]
     if elements.scheme == "https":
         certString = ssl.get_server_certificate((socket.gethostbyname(elements.netloc),443))
-        x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, certString)
-        print(x509.get_notAfter())
-        print(x509.get_issuer())
+        certificate = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, certString.encode('utf-8'))
+        Issuer = certificate.get_issuer()
+        #print(Issuer.O)
+        pattern = '%Y%m%d%H%M%Sz' # Pattern Matching for certificate dates
+        currentTime = datetime.datetime.now() # Getting current calendar date
+
+        # Checking if the Certificate is more than a year old
+        startDate = str(certificate.get_notBefore(),'utf-8') # Getting the notBefore date on the Certificate
+        startDateEpoch = int(time.mktime(time.strptime(startDate, pattern))) # Converting to Epoch Seconds
+        startDateCal = datetime.datetime.fromtimestamp(startDateEpoch) # Converting to calendar date
+
+        AgeInMonths = (currentTime.year - startDateCal.year) * 12 + (currentTime.month - startDateCal.month) # Finding age of license in months
+        
+        # Checking if the Certificate is valid for over a year
+        endDate = str(certificate.get_notAfter(),'utf-8') # Getting the notAfter date on the Certificate
+        endDateEpoch = int(time.mktime(time.strptime(endDate, pattern))) # Converting to Epoch Seconds
+        endDateCal = datetime.datetime.fromtimestamp(endDateEpoch) # Converting to calendar date
+
+        ExpiryInMonths = (endDateCal.year - currentTime.year) * 12 + (endDateCal.year - currentTime.year) # Finding expiry time in months
+
+        if AgeInMonths > 12 and ExpiryInMonths > 12:
+            features["SSLfinal_State"] = 1    
+        else:
+            features["SSLfinal_State"] = -1    
     else:
         features["SSLfinal_State"] = -1
 
+def getWhoisData():
+    data = whois.whois(URL)
+    currentTime = datetime.datetime.now()
+    print(data)
+
+    # Getting registration and expiry dates from whois records.
+    if type(data["expiration_date"]) == list:
+        expiryDate = data["expiration_date"][0]
+    else:
+        expiryDate = data["expiration_date"]
+
+    if type(data["creation_date"]) == list:
+        creationDate = data["creation_date"][0]
+    else:
+        creationDate = data["creation_date"]
+
+    # Checking if the domain registration date is more than 6 months ago
+    monthsFromCreation = (currentTime.year - creationDate.year) * 12 + (currentTime.month - creationDate.month)
+
+    if monthsFromCreation < 6:
+        features["age_of_domain"] = -1
+    else:
+        features["age_of_domain"] = 1
+
+    # Checking if the domain is registered for atleast 12 months into the future
+    monthsTillExpiration = (expiryDate.year - currentTime.year) * 12 + (expiryDate.month - currentTime.month)
+
+    if monthsTillExpiration <= 12:
+        features["Domain_registration_length"] = -1
+    else:
+        features["Domain_registration_length"] = 1
+
+    
+    
 
 def extractAllFeatures(url):
     """
@@ -231,9 +297,12 @@ def extractAllFeatures(url):
     extractHavingIpAdress()
     extractHavingIpAdress()
     extractSSLFinalState()
+    getWhoisData()
     print(features)
     return features
 
 link = "https://www.youtube.com/watch?v=_tNU6dpjIyM"
+link1 = "https://www.netflix.com/browse"
 link1 = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
+link1 = "https://www.theverge.com/"
 extractAllFeatures(link)

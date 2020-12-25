@@ -1,17 +1,19 @@
-0             having_IP_Address Done
-1                    URL_Length Done
-2            Shortining_Service Done
-3              having_At_Symbol Done
-4      double_slash_redirecting Done
-5                 Prefix_Suffix Done
-6             having_Sub_Domain Done
-10                         port Done
-11                  HTTPS_token Done
-18                     Redirect Done
+0             having_IP_Address     Done
+1                    URL_Length     Done
+2            Shortining_Service     Done
+3              having_At_Symbol     Done
+4      double_slash_redirecting     Done
+5                 Prefix_Suffix     Done
+6             having_Sub_Domain     Done
+10                         port     Done
+11                  HTTPS_token     Done
+18                     Redirect     Done
+7                SSLfinal_State     Done ish
+8   Domain_registeration_length     Done
+23                age_of_domain     Done
 
 API calls
 17                 Abnormal_URL
-23                age_of_domain
 24                    DNSRecord
 25                  web_traffic
 
@@ -22,8 +24,7 @@ Find more info
 29           Statistical_report
 
 Needs HTML inspection
-7                SSLfinal_State
-8   Domain_registeration_length
+
 9                       Favicon
 12                  Request_URL
 13                URL_of_Anchor
