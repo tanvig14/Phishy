@@ -11,24 +11,7 @@ import whois
 import os
 import sys
 
-features = {
-    "having_IP_Address": 0,
-    "port": 0,
-    "URL_Length": 0,
-    "having_At_Symbol": 0,
-    "double_slash_redirecting": 0,
-    "Prefix_Suffix": 0,
-    "Redirect": 0,
-    "HTTPS_token": 0,
-    "Shortining_Service": 0,
-    "having_Sub_Domain": 0,
-    "having_IP_Address": 0,
-    "SSLfinal_State": 0,
-    "age_of_domain": 0,
-    "Domain_registration_length": 0,
-    "Favicon": 0,
-    "Submitting_to_email": 0,
-}
+
 
 ports = {
     "http": 80,
@@ -124,12 +107,14 @@ def extractRedirects():
     1) -1 if more than one redirects take place.
     2) 1 if less than or equal to 1 redirects take place.
     """
-
-    responses = requests.get(URL, allow_redirects=True)
-    if len(responses.history) > 1:
-        features["Redirect"] = -1
-    else:
-        features["Redirect"] = 1
+    try:
+        responses = requests.get(URL, allow_redirects=True)
+        if len(responses.history) > 1:
+            features["Redirect"] = -1
+        else:
+            features["Redirect"] = 1
+    except requests.exceptions.SSLError:
+        print("Critical Error: Could not find ssl certificate")
 
 def extractHttpsToken():
     """
@@ -253,38 +238,73 @@ def extractWhoisData():
     1) -1 if the domain registration expires withing 12 months from the current date.
     2) 1 if the domain registration expires after 12 months from the current date.
     """
-    
-    data = whois.whois(URL)
-    currentTime = datetime.datetime.now()
+    try:
 
-    # Getting registration and expiry dates from whois records.
-    if type(data["expiration_date"]) == list:
-        expiryDate = data["expiration_date"][0]
-    else:
-        expiryDate = data["expiration_date"]
+        data = whois.whois(URL)
+        currentTime = datetime.datetime.now()
 
-    if type(data["creation_date"]) == list:
-        creationDate = data["creation_date"][0]
-    else:
-        creationDate = data["creation_date"]
+        if data == None:
+            features["age_of_domain"] = -1
+            features["Domain_registration_length"] = -1
+        else:
+            # Getting registration and expiry dates from whois records.
 
-    # Checking if the domain registration date is more than 6 months ago
-    monthsFromCreation = (currentTime.year - creationDate.year) * 12 + (currentTime.month - creationDate.month)
+            # Flagging as suspicious if the creation or expiration dates are null
 
-    if monthsFromCreation < 6:
-        features["age_of_domain"] = -1
-    else:
-        features["age_of_domain"] = 1
+            if data["expiration_date"] is None:
+                features["Domain_registration_length"] = -1
+            if data["creation_date"] is None:
+                features["age_of_domain"] = -1
+            
+            #Extracting expiration date
 
-    # Checking if the domain is registered for atleast 12 months into the future
-    monthsTillExpiration = (expiryDate.year - currentTime.year) * 12 + (expiryDate.month - currentTime.month)
+            if type(data["expiration_date"]) == list:
+                expiryDate = data["expiration_date"][0]
+            else:
+                expiryDate = data["expiration_date"]
 
-    if monthsTillExpiration <= 12:
-        features["Domain_registration_length"] = -1
-    else:
-        features["Domain_registration_length"] = 1
+            # Extracting creation date
+            if type(data["creation_date"]) == list:
+                creationDate = data["creation_date"][0]
+            else:
+                creationDate = data["creation_date"]
+
+            # Checking to make sure the age_of_domain feature is not flagged as suspicious beacuse it contains a null date of creation
+            if features["age_of_domain"] != -1:
+                # Checking if the domain registration date is more than 6 months ago
+                monthsFromCreation = (currentTime.year - creationDate.year) * 12 + (currentTime.month - creationDate.month)
+
+                if monthsFromCreation < 6:
+                    features["age_of_domain"] = -1
+                else:
+                    features["age_of_domain"] = 1
+
+            # Checking to make sure the Domain_registration_length is not flagged as suspicious beacuse it contains a null date of expiry
+            if features["Domain_registration_length"] != -1:
+                # Checking if the domain is registered for atleast 12 months into the future
+                monthsTillExpiration = (expiryDate.year - currentTime.year) * 12 + (expiryDate.month - currentTime.month)
+
+                if monthsTillExpiration <= 12:
+                    features["Domain_registration_length"] = -1
+                else:
+                    features["Domain_registration_length"] = 1
+
+    except whois.parser.PywhoisError:
+        print("Critical error: Can't complete WHOIS lookup")
 
 def extractHtmlAndJsFeatures():
+    """
+    [Active] Sets the Favicon and Submitting_to_email features after scrapping and assessing the script for the given website.
+
+    Favicon
+    1) -1 if the Favicon does not follow the industry standard for including favicon icon or hosting the icon file at a different domain.
+    2) 1 if the Favicon follows the industry standard for including favicon icon and the icon file is hosted on the same domain.
+
+    Submitting_to_email
+    1) -1 if the pageSource contains mail() or mailto:
+    2) 1 if the pageSource does not contain mail() and mailto:
+
+    """
     PATH = "WebDrivers/chromedriver"
 
     driver = webdriver.Chrome(PATH)
@@ -345,7 +365,6 @@ def extractHtmlAndJsFeatures():
 
     driver.quit()
 
-
 def extractAllFeatures(url):
     """
     Takes a URL and extracts all the features required for classification.
@@ -356,11 +375,32 @@ def extractAllFeatures(url):
     Returns:
         [dictionary]: A dictionary containing all the features for the given URL.
     """
+    global features
+    features = {
+    "having_IP_Address": 0,
+    "port": 0,
+    "URL_Length": 0,
+    "having_At_Symbol": 0,
+    "double_slash_redirecting": 0,
+    "Prefix_Suffix": 0,
+    "Redirect": 0,
+    "HTTPS_token": 0,
+    "Shortining_Service": 0,
+    "having_Sub_Domain": 0,
+    "having_IP_Address": 0,
+    "SSLfinal_State": 0,
+    "age_of_domain": 0,
+    "Domain_registration_length": 0,
+    "Favicon": 0,
+    "Submitting_to_email": 0,
+    }
+
     global URL 
-    global elements
     URL = url
+
+    global elements
     elements = urlparse(URL)
-    print(elements)
+
     extractPort()
     extractAtSymbol()
     extractUrlLength()
@@ -379,10 +419,11 @@ def extractAllFeatures(url):
     return features
 
 link = "https://www.youtube.com/watch?v=_tNU6dpjIyM"
-link1 = "https://www.netflix.com/browse"
-link1 = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
-link1 = "https://www.theverge.com/"
-link1 = "http://toomanymatrices.herokuapp.com/"
-link1 = "https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554433&REALMOID=06-a655cb7c-58d0-4028-b49f-79a4f5c6dd58&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-dr9Cn7JnD4pZ%2fX9Y7a9FAQedR3gjL8aBVPXnJiLeXLOpk38WGJuo%2fOQRlFkbatU7C%2b9kHQgeqhK7gmsMW81KnMmzfZ3v0paM&TARGET=-SM-HTTPS%3a%2f%2fwebprod%2eadmin%2euillinois%2eedu%2fssa%2fservlet%2fSelfServiceLogin%3fappName%3dedu%2euillinois%2eaits%2eSelfServiceLogin%26dad%3dBANPROD1"
+link = "https://www.netflix.com/browse"
+link = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
+link = "https://www.theverge.com/"
+link = "http://toomanymatrices.herokuapp.com/"
+link = "https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554433&REALMOID=06-a655cb7c-58d0-4028-b49f-79a4f5c6dd58&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-dr9Cn7JnD4pZ%2fX9Y7a9FAQedR3gjL8aBVPXnJiLeXLOpk38WGJuo%2fOQRlFkbatU7C%2b9kHQgeqhK7gmsMW81KnMmzfZ3v0paM&TARGET=-SM-HTTPS%3a%2f%2fwebprod%2eadmin%2euillinois%2eedu%2fssa%2fservlet%2fSelfServiceLogin%3fappName%3dedu%2euillinois%2eaits%2eSelfServiceLogin%26dad%3dBANPROD1"
 link = "https://cwlosek.shinyapps.io/uiuc-gpa-data/"
+
 extractAllFeatures(link)
