@@ -3,6 +3,9 @@ import pandas as pd
 from scipy.io.arff import loadarff 
 
 raw_data = loadarff(open('train.arff','r'))
-pd.set_option("display.max_rows", None, "display.max_columns", None)
-data = pd.DataFrame(raw_data[1])
+data = pd.DataFrame(raw_data[0])
+data["Result"] = str(data["Result"],'utf-8')
 print(data)
+c1 = data["URL_Length"]
+c2 = data["Result"]
+print(c1.corr(c2))

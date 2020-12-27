@@ -1,11 +1,15 @@
 from urllib.parse import urlparse
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import requests
 import socket
 import ssl  
 import OpenSSL
 import time
 import datetime
-import whois             
+import whois 
+import os
+import sys
 
 features = {
     "having_IP_Address": 0,
@@ -22,6 +26,8 @@ features = {
     "SSLfinal_State": 0,
     "age_of_domain": 0,
     "Domain_registration_length": 0,
+    "Favicon": 0,
+    "Submitting_to_email": 0,
 }
 
 ports = {
@@ -205,12 +211,12 @@ def extractSSLFinalState():
     2) 1 if the SSL certificate is more than 12 months old and expires in more than 12 months.
     """
 
-    trustedIssuers = ["GeoTrust", "GoDaddy", "Network Solutions", "Thawte", "Comodo", "Doster", "VeriSign"]
+    # trustedIssuers = ["GeoTrust", "GoDaddy", "Network Solutions", "Thawte", "Comodo", "Doster", "VeriSign"]
     if elements.scheme == "https":
         certString = ssl.get_server_certificate((socket.gethostbyname(elements.netloc),443))
         certificate = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, certString.encode('utf-8'))
-        Issuer = certificate.get_issuer()
-        #print(Issuer.O)
+        # Issuer = certificate.get_issuer()
+
         pattern = '%Y%m%d%H%M%Sz' # Pattern Matching for certificate dates
         currentTime = datetime.datetime.now() # Getting current calendar date
 
@@ -235,10 +241,21 @@ def extractSSLFinalState():
     else:
         features["SSLfinal_State"] = -1
 
-def getWhoisData():
+def extractWhoisData():
+    """
+    [Active] Sets the age_of_domain and Domain_registeration_length feature after checking the whois database for the given domain.
+
+    age_of_domain
+    1) -1 if the domain was registered less than 6 months ago.
+    2) 1 if the domain has been registered for more than 6 months.
+
+    Domain_registeration_length
+    1) -1 if the domain registration expires withing 12 months from the current date.
+    2) 1 if the domain registration expires after 12 months from the current date.
+    """
+    
     data = whois.whois(URL)
     currentTime = datetime.datetime.now()
-    print(data)
 
     # Getting registration and expiry dates from whois records.
     if type(data["expiration_date"]) == list:
@@ -267,8 +284,67 @@ def getWhoisData():
     else:
         features["Domain_registration_length"] = 1
 
-    
-    
+def extractHtmlAndJsFeatures():
+    PATH = "WebDrivers/chromedriver"
+
+    driver = webdriver.Chrome(PATH)
+    driver.get(URL)
+
+    # Getting page source
+    pageSource = driver.page_source
+
+    # 1. CHECKING THE FAVICON FEATURE
+
+    if ("<link rel=\"shortcut icon\"" not in pageSource) and ("<link rel=\"icon\"" not in pageSource):
+        features["Favicon"] = -1
+    elif ("<link rel=\"shortcut icon\"" in pageSource):
+        start = pageSource.find("<link rel=\"shortcut icon\"") # Getting the index where the shortcut icon link was found.
+        endTag = pageSource.find(">", start) # Getting the index where the link tag closes
+        hrefIndex = pageSource.find("href",start)  # Getting the index where the first href after the "short icon" appears
+
+        # Flagged as suspicious of the tag is closed without an href.
+        if endTag < hrefIndex:
+            features["Favicon"] = -1
+        else:
+            urlStart = pageSource.find("\"", hrefIndex) # Getting the start index of the link
+            urlEnd = pageSource.find("\"", urlStart + 1) # Getting the end index of the link
+            imageHref = pageSource[urlStart + 1 : urlEnd] # Getting the href url
+
+            # Checking if the domain of the favicon url and orignal url are the same.
+            if urlparse(imageHref).netloc != elements.netloc:
+                features["Favicon"] = -1
+            else:
+                features["Favicon"] = 1
+    elif ("<link rel=\"icon\"" in pageSource):
+        start = pageSource.find("<link rel=\"icon\"") # Getting the index where the icon link was found.
+        endTag = pageSource.find(">", start) # Getting the index where the link tag closes
+        hrefIndex = pageSource.find("href",start)  # Getting the index where the first href after the "short icon" appears
+
+        # Flagged as suspicious of the tag is closed without an href.
+        if endTag < hrefIndex:
+            features["Favicon"] = -1
+        else:
+            urlStart = pageSource.find("\"", hrefIndex) # Getting the start index of the link
+            urlEnd = pageSource.find("\"", urlStart + 1) # Getting the end index of the link
+            imageHref = pageSource[urlStart + 1 : urlEnd] # Getting the href url
+
+            # Checking if the domain of the favicon url and orignal url are the same.
+            if urlparse(imageHref).netloc != elements.netloc:
+                features["Favicon"] = -1
+            else:
+                features["Favicon"] = 1
+    else:
+        features["Favicon"] = -1
+
+    # 2. CHECKING THE EMAIL SUBMISSION FEATURE
+
+    if "mail()" in pageSource or "mailto:" in pageSource:
+        features["Submitting_to_email"] = -1
+    else:
+        features["Submitting_to_email"] = 1
+
+    driver.quit()
+
 
 def extractAllFeatures(url):
     """
@@ -297,7 +373,8 @@ def extractAllFeatures(url):
     extractHavingIpAdress()
     extractHavingIpAdress()
     extractSSLFinalState()
-    getWhoisData()
+    extractWhoisData()
+    extractHtmlAndJsFeatures()
     print(features)
     return features
 
@@ -305,4 +382,7 @@ link = "https://www.youtube.com/watch?v=_tNU6dpjIyM"
 link1 = "https://www.netflix.com/browse"
 link1 = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
 link1 = "https://www.theverge.com/"
+link1 = "http://toomanymatrices.herokuapp.com/"
+link1 = "https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554433&REALMOID=06-a655cb7c-58d0-4028-b49f-79a4f5c6dd58&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-dr9Cn7JnD4pZ%2fX9Y7a9FAQedR3gjL8aBVPXnJiLeXLOpk38WGJuo%2fOQRlFkbatU7C%2b9kHQgeqhK7gmsMW81KnMmzfZ3v0paM&TARGET=-SM-HTTPS%3a%2f%2fwebprod%2eadmin%2euillinois%2eedu%2fssa%2fservlet%2fSelfServiceLogin%3fappName%3dedu%2euillinois%2eaits%2eSelfServiceLogin%26dad%3dBANPROD1"
+link = "https://cwlosek.shinyapps.io/uiuc-gpa-data/"
 extractAllFeatures(link)

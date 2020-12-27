@@ -16,21 +16,21 @@ API calls
 17                 Abnormal_URL
 24                    DNSRecord
 25                  web_traffic
-
-Find more info
 26                    Page_Rank
 27                 Google_Index
+
+Find more info
+
 28       Links_pointing_to_page
 29           Statistical_report
 
 Needs HTML inspection
 
-9                       Favicon
-12                  Request_URL
+9                       Favicon     Done                  Request_URL
 13                URL_of_Anchor
 14                Links_in_tags
 15                          SFH
-16          Submitting_to_email
+16          Submitting_to_email     Done
 19                 on_mouseover
 20                   RightClick
 21                  popUpWidnow
