@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 import requests
 import socket
 import ssl  
@@ -10,8 +11,6 @@ import datetime
 import whois 
 import os
 import sys
-
-
 
 ports = {
     "http": 80,
@@ -305,9 +304,14 @@ def extractHtmlAndJsFeatures():
     2) 1 if the pageSource does not contain mail() and mailto:
 
     """
-    PATH = "WebDrivers/chromedriver"
+    PATH = "../src/WebDrivers/chromedriver"
+    print(PATH)
 
-    driver = webdriver.Chrome(PATH)
+    option = Options()
+    option.headless = True
+
+    # Making the selenium actions headless
+    driver = webdriver.Chrome(PATH, options=option)
     driver.get(URL)
 
     # Getting page source
@@ -377,23 +381,22 @@ def extractAllFeatures(url):
     """
     global features
     features = {
-    "having_IP_Address": 0,
-    "port": 0,
-    "URL_Length": 0,
-    "having_At_Symbol": 0,
-    "double_slash_redirecting": 0,
-    "Prefix_Suffix": 0,
-    "Redirect": 0,
-    "HTTPS_token": 0,
-    "Shortining_Service": 0,
-    "having_Sub_Domain": 0,
-    "having_IP_Address": 0,
-    "SSLfinal_State": 0,
-    "age_of_domain": 0,
-    "Domain_registration_length": 0,
-    "Favicon": 0,
-    "Submitting_to_email": 0,
-    }
+        "having_IP_Address": 0,
+        "port": 0,
+        "URL_Length": 0,
+        "having_At_Symbol": 0,
+        "double_slash_redirecting": 0,
+        "Prefix_Suffix": 0,
+        "Redirect": 0,
+        "HTTPS_token": 0,
+        "Shortining_Service": 0,
+        "having_Sub_Domain": 0,
+        "having_IP_Address": 0,
+        "SSLfinal_State": 0,
+        "age_of_domain": 0,
+        "Domain_registration_length": 0,
+        "Favicon": 0,
+        "Submitting_to_email": 0}
 
     global URL 
     URL = url
@@ -401,6 +404,7 @@ def extractAllFeatures(url):
     global elements
     elements = urlparse(URL)
 
+    print(elements.netloc)
     extractPort()
     extractAtSymbol()
     extractUrlLength()
@@ -417,13 +421,3 @@ def extractAllFeatures(url):
     extractHtmlAndJsFeatures()
     print(features)
     return features
-
-link = "https://www.youtube.com/watch?v=_tNU6dpjIyM"
-link = "https://www.netflix.com/browse"
-link = "https://stackoverflow.com/questions/30862099/how-can-i-get-certificate-issuer-information-in-python"
-link = "https://www.theverge.com/"
-link = "http://toomanymatrices.herokuapp.com/"
-link = "https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554433&REALMOID=06-a655cb7c-58d0-4028-b49f-79a4f5c6dd58&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-dr9Cn7JnD4pZ%2fX9Y7a9FAQedR3gjL8aBVPXnJiLeXLOpk38WGJuo%2fOQRlFkbatU7C%2b9kHQgeqhK7gmsMW81KnMmzfZ3v0paM&TARGET=-SM-HTTPS%3a%2f%2fwebprod%2eadmin%2euillinois%2eedu%2fssa%2fservlet%2fSelfServiceLogin%3fappName%3dedu%2euillinois%2eaits%2eSelfServiceLogin%26dad%3dBANPROD1"
-link = "https://cwlosek.shinyapps.io/uiuc-gpa-data/"
-
-extractAllFeatures(link)
