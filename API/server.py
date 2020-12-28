@@ -28,8 +28,8 @@ def results():
 
     requestData = request.args
     URL = requestData.get("url")
+
     features = extractAllFeatures(URL)
-    print(features)
 
     result = {
         'URL': URL,
@@ -53,11 +53,13 @@ def adv_results():
     requestData = request.args
     URL = requestData.get("url")
 
+    features = extractAllFeatures(URL)
+
     result = {
         'URL': URL,
         'Result': '',
         'Confidence Score': '',
-        'Features':''}
+        'Features': features}
     
     toReturn = jsonify(result)
     toReturn.headers.add('Access-Control-Allow-Origin', '*')
