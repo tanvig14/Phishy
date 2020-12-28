@@ -21,14 +21,13 @@ def results():
     """
     Uses the API call to pass the URL through the model and returns a JSON with the passed URL, the result as determined 
     by the Model and a confidence score. 
-
     Returns:
         [JSON String]: [Contains the orignal URL, the models result and a confidence score]
     """
 
     requestData = request.args
     URL = requestData.get("url")
-
+    
     features = extractAllFeatures(URL)
 
     result = {
@@ -45,7 +44,6 @@ def adv_results():
     """
     Uses the API call to pass the URL through the model and returns a JSON with the passed URL, the result as determined 
     by the Model and a confidence score along with the indiviual feature classification
-
     Returns:
         [JSON String]: [Contains the orignal URL, the models result and a confidence score along with the indiviual feature results]
     """
