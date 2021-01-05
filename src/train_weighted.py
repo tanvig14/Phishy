@@ -52,20 +52,15 @@ correlation = {
     "age_of_domain": int_df["age_of_domain"].corr(int_df["Result"])
 }
 
-weigths = [correlation[x] for x in correlation]
-print(weigths)
-
 # Loading values
 x = int_df.values[:,0:30 - len(droppedFeatures)]
 y = int_df.values[:,30 - len(droppedFeatures)]
 
-print(x)
-
+# Adding weights
+weigths = [correlation[x] for x in correlation]
 for list in x:
     for i in range(len(list)):
         list[i] = float(list[i] * weigths[i])
-
-print(x)
 
 # Splitting the dataset for training and testing.
 x_tr, x_ts, y_tr, y_ts = train_test_split(x,y,test_size=0.20)
@@ -77,10 +72,15 @@ model.fit(x_tr,y_tr)
 # Running prediction on the testing set
 predict = model.predict(x_ts)
 
-# Printing results
-print("Accuracy: ",accuracy_score(y_ts, predict))
-print("F1 Score: ",f1_score(y_ts, predict))
-print(correlation)
+# Saving results
+Accuracy = "Accuracy: " + str(accuracy_score(y_ts, predict))
+F1_Score = "\nF1 Score: " + str(f1_score(y_ts, predict))
+Precision = "\nPrecison: " + str(precision_score(y_ts, predict))
+Recall = "\nRecall: " + str(recall_score(y_ts, predict))
+
+text_file = open("../models/weighted_stats.txt", "w")
+text_file.write(Accuracy + F1_Score + Precision + Recall)
+text_file.close()
 
 # Saving model
 pickle.dump(model, open('../models/weighed_final_model.sav','wb'))

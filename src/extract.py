@@ -305,7 +305,6 @@ def extractHtmlAndJsFeatures():
 
     """
     PATH = "../src/WebDrivers/chromedriver"
-    print(PATH)
 
     option = Options()
     option.headless = True
@@ -382,21 +381,21 @@ def extractAllFeatures(url):
     global features
     features = {
         "having_IP_Address": 0,
-        "port": 0,
         "URL_Length": 0,
+        "Shortining_Service": 0,
         "having_At_Symbol": 0,
         "double_slash_redirecting": 0,
         "Prefix_Suffix": 0,
-        "Redirect": 0,
-        "HTTPS_token": 0,
-        "Shortining_Service": 0,
         "having_Sub_Domain": 0,
-        "having_IP_Address": 0,
         "SSLfinal_State": 0,
+        "Favicon": 0,
+        "port": 0,
+        "HTTPS_token": 0,
+        "Submitting_to_email": 0,
+        "Redirect": 0,
         "age_of_domain": 0,
         "Domain_registration_length": 0,
-        "Favicon": 0,
-        "Submitting_to_email": 0}
+    }
 
     global URL 
     URL = url
@@ -404,7 +403,6 @@ def extractAllFeatures(url):
     global elements
     elements = urlparse(URL)
 
-    print(elements.netloc)
     extractPort()
     extractAtSymbol()
     extractUrlLength()
@@ -419,5 +417,5 @@ def extractAllFeatures(url):
     extractSSLFinalState()
     extractWhoisData()
     extractHtmlAndJsFeatures()
-    print(features)
+
     return features

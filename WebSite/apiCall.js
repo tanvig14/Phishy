@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 
       var request = $.ajax({
-        url: "http://127.0.0.1:5000/adv_results/",
+        url: "http://127.0.0.1:5000/results/",
         method: "GET",
         dataType: "json",
         data: {

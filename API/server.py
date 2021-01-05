@@ -1,11 +1,14 @@
 import flask
 import sys
+import pickle
 from flask import jsonify, request
 sys.path.append("..")
 from src.extract import extractAllFeatures
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+
+model = pickle.load(open('../models/final_model.sav', 'rb'))
 
 @app.route('/', methods=['GET'])
 def home():
@@ -29,10 +32,15 @@ def results():
     URL = requestData.get("url")
     
     features = extractAllFeatures(URL)
+    del features['Domain_registration_length']
+    featureList = [features[x] for x in features]
+    featureList = [featureList]
+
+    prediction = model.predict(featureList)
 
     result = {
         'URL': URL,
-        'Result': '',
+        'Result': str(prediction[0]),
         'Confidence Score': '',}
     
     toReturn = jsonify(result)
@@ -52,10 +60,15 @@ def adv_results():
     URL = requestData.get("url")
 
     features = extractAllFeatures(URL)
+    del features['Domain_registration_length']
+    featureList = [features[x] for x in features]
+    featureList = [featureList]
+
+    prediction = model.predict(featureList)
 
     result = {
         'URL': URL,
-        'Result': '',
+        'Result': str(prediction[0]),
         'Confidence Score': '',
         'Features': features}
     
