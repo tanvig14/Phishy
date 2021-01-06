@@ -32,16 +32,19 @@ def results():
     try:
         features = extractAllFeatures(URL)
         del features['Domain_registration_length']
-        featureList = [features[x] for x in features]
-        featureList = [featureList]
+        list = [features[x] for x in features]
+        featureList = [list]
 
         prediction = model.predict(featureList)
-        print(prediction)
+        counter = 0
+        for val in list:
+            if int(val) == prediction[0]:
+                counter = counter + 1
 
         result = {
             'URL': URL,
             'Result': str(prediction[0]),
-            'Confidence Score': '',}
+            'Confidence Score': str(counter/14),}
         
         toReturn = jsonify(result)
         toReturn.headers.add('Access-Control-Allow-Origin', '*')
@@ -71,16 +74,19 @@ def adv_results():
     try:
         features = extractAllFeatures(URL)
         del features['Domain_registration_length']
-        featureList = [features[x] for x in features]
-        featureList = [featureList]
+        list = [features[x] for x in features]
+        featureList = [list]
 
         prediction = model.predict(featureList)
-        print(prediction)
+        counter = 0
+        for val in list:
+            if int(val) == prediction[0]:
+                counter = counter + 1
 
         result = {
             'URL': URL,
             'Result': str(prediction[0]),
-            'Confidence Score': '',
+            'Confidence Score': counter/14,
             'Features': features}
         
         toReturn = jsonify(result)
