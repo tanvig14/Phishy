@@ -60,4 +60,4 @@ text_file.write(Accuracy + F1_Score + Precision + Recall)
 text_file.close()
 
 # Saving model
-pickle.dump(model, open('final_model.sav','wb'))
+pickle.dump(model, open('../models/final_model.pkl','wb'))

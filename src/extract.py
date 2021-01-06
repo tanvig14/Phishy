@@ -1,3 +1,4 @@
+
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -28,7 +29,6 @@ ports = {
 def extractPort():
     """
     [Active] Sets the port feature based on port status.
-
     1) -1 if any port except 80(http) and 443(https) are open.
     2) 1 if no port except 80(http) and 443(https) are open.
     """
@@ -50,7 +50,6 @@ def extractPort():
 def extractUrlLength():
     """
     [Passive] Sets the URL_Length feature with the threshold value of 54.
-
     1) -1 if the length is greater than or equal to 54.
     2) 1 if the length is less than 54.
     """
@@ -63,7 +62,6 @@ def extractUrlLength():
 def extractAtSymbol():
     """
     [Passive] Sets the having_At_Symbol feature based on the presence of @ in the URL
-
     1) -1 if the URL contains @
     2) 1 if the URL does not contain @
     """
@@ -76,7 +74,6 @@ def extractAtSymbol():
 def extractDoubleSlashRedirecting():
     """
     [Passive] Sets the double_slash_redirecting feature based on the position of the last //.
-
     1) -1 if the last occuring // is after the 6th index.
     2) 1 if the last occuring // is before the 6th index.
     """
@@ -89,7 +86,6 @@ def extractDoubleSlashRedirecting():
 def extractPrefixSuffix():
     """
     [Passive] Sets the Prefix_Suffix feature after checking if the domain(netloc) comtains a -.
-
     1) -1 if the domain(netloc) contains a -.
     2) 1 if the domain(netloc) does not contain a -.
     """
@@ -102,7 +98,6 @@ def extractPrefixSuffix():
 def extractRedirects():
     """
     [Active] Sets the Redirect feature after checking if the URL redirects to a different URL.
-
     1) -1 if more than one redirects take place.
     2) 1 if less than or equal to 1 redirects take place.
     """
@@ -118,7 +113,6 @@ def extractRedirects():
 def extractHttpsToken():
     """
     [Passive] Sets the HTTPS_token feature after checking if the domain starts with https or http.
-
     1) -1 if the domain begins with https or http.
     2) 1 if the domain does not begin with https or http.
     """
@@ -130,7 +124,6 @@ def extractHttpsToken():
 def extractShortiningService():
     """
     [Passive] Sets the Shortining_Service feature after checking if the domain starts with one of the popular link shortening websites.
-
     1) -1 if the domain begins with a link shortening domain.
     2) 1 if the domain does not begin with a link shortening domain.
     """
@@ -144,7 +137,6 @@ def extractHavingSubDomain():
     """
     [Passive] Sets the having_Sub_Domain feature after checking how many sub-domains the hostname has.
     This number include the "www." prefix and the top level domain like ".com" or ".uk"
-
     1) -1 if the hostname has more than 3 parts after splitting along '.' ie "www." + some name + ".com". 
     2) 1 if the hostname has 3 or fewer parts after splitting along '.'
     """
@@ -158,7 +150,6 @@ def extractHavingSubDomain():
 def extractHavingIpAdress():
     """
     [Passive] Sets the having_IP_Address feature after checking if the domain resembles an IP adress.
-
     1) -1 if the domain resembles an IP Address in integer or hexadecimal form.
     2) 1 if the domain does not resemble an IP Address in integer or hexadecimal form.
     """
@@ -190,7 +181,6 @@ def extractHavingIpAdress():
 def extractSSLFinalState():
     """
     [Active] Sets the SSLfinal_State feature after checking the SSL certificate.
-
     1) -1 if the SSL certificate is less than 12 months old or expires in less than 12 months.
     2) 1 if the SSL certificate is more than 12 months old and expires in more than 12 months.
     """
@@ -228,11 +218,9 @@ def extractSSLFinalState():
 def extractWhoisData():
     """
     [Active] Sets the age_of_domain and Domain_registeration_length feature after checking the whois database for the given domain.
-
     age_of_domain
     1) -1 if the domain was registered less than 6 months ago.
     2) 1 if the domain has been registered for more than 6 months.
-
     Domain_registeration_length
     1) -1 if the domain registration expires withing 12 months from the current date.
     2) 1 if the domain registration expires after 12 months from the current date.
@@ -294,15 +282,12 @@ def extractWhoisData():
 def extractHtmlAndJsFeatures():
     """
     [Active] Sets the Favicon and Submitting_to_email features after scrapping and assessing the script for the given website.
-
     Favicon
     1) -1 if the Favicon does not follow the industry standard for including favicon icon or hosting the icon file at a different domain.
     2) 1 if the Favicon follows the industry standard for including favicon icon and the icon file is hosted on the same domain.
-
     Submitting_to_email
     1) -1 if the pageSource contains mail() or mailto:
     2) 1 if the pageSource does not contain mail() and mailto:
-
     """
     PATH = "../src/WebDrivers/chromedriver"
 
@@ -371,10 +356,8 @@ def extractHtmlAndJsFeatures():
 def extractAllFeatures(url):
     """
     Takes a URL and extracts all the features required for classification.
-
     Args:
         url (String): A string storing the URL.
-
     Returns:
         [dictionary]: A dictionary containing all the features for the given URL.
     """

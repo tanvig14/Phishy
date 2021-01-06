@@ -8,7 +8,7 @@ from src.extract import extractAllFeatures
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-model = pickle.load(open('../models/final_model.sav', 'rb'))
+model = pickle.load(open('../models/final_model.pkl', 'rb'))
 
 @app.route('/', methods=['GET'])
 def home():
@@ -27,25 +27,34 @@ def results():
     Returns:
         [JSON String]: [Contains the orignal URL, the models result and a confidence score]
     """
-
     requestData = request.args
     URL = requestData.get("url")
-    
-    features = extractAllFeatures(URL)
-    del features['Domain_registration_length']
-    featureList = [features[x] for x in features]
-    featureList = [featureList]
+    try:
+        features = extractAllFeatures(URL)
+        del features['Domain_registration_length']
+        featureList = [features[x] for x in features]
+        featureList = [featureList]
 
-    prediction = model.predict(featureList)
+        prediction = model.predict(featureList)
+        print(prediction)
 
-    result = {
-        'URL': URL,
-        'Result': str(prediction[0]),
-        'Confidence Score': '',}
-    
-    toReturn = jsonify(result)
-    toReturn.headers.add('Access-Control-Allow-Origin', '*')
-    return toReturn
+        result = {
+            'URL': URL,
+            'Result': str(prediction[0]),
+            'Confidence Score': '',}
+        
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
+    except:
+        result = {
+            'URL': URL,
+            'Result': 0,
+            'Confidence Score': 0,}
+        
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
 
 @app.route('/adv_results/', methods=["GET"])
 def adv_results():
@@ -59,22 +68,35 @@ def adv_results():
     requestData = request.args
     URL = requestData.get("url")
 
-    features = extractAllFeatures(URL)
-    del features['Domain_registration_length']
-    featureList = [features[x] for x in features]
-    featureList = [featureList]
+    try:
+        features = extractAllFeatures(URL)
+        del features['Domain_registration_length']
+        featureList = [features[x] for x in features]
+        featureList = [featureList]
 
-    prediction = model.predict(featureList)
+        prediction = model.predict(featureList)
+        print(prediction)
 
-    result = {
-        'URL': URL,
-        'Result': str(prediction[0]),
-        'Confidence Score': '',
-        'Features': features}
+        result = {
+            'URL': URL,
+            'Result': str(prediction[0]),
+            'Confidence Score': '',
+            'Features': features}
+        
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
+    except:
+        result = {
+            'URL': URL,
+            'Result': 0,
+            'Confidence Score': 0,
+            'Features': None}
+        
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
     
-    toReturn = jsonify(result)
-    toReturn.headers.add('Access-Control-Allow-Origin', '*')
-    return toReturn
 
 @app.route('/sendIt/', methods=["GET"])
 def sendIt():
