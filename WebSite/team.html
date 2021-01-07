@@ -1,267 +1,461 @@
-
-<div class="background"></div>
-
-<div class="outer-div">
-  <div class="inner-div">
-    <div class="front">
-      <div class="front__bkg-photo"></div>
-      <div class="front__face-photo"></div>
-      <div class="front__text">
-        <h3 class="front__text-header">Bobby Korec</h3>
-        <p class="front__text-para"><i class="fas fa-map-marker-alt front-icons"></i>There is so much space</p>
-        
-        <span class="front__text-hover">Hover to Find Me</span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Our Team</title>
+  </head>
+  <body>
+    <section class="section-plans" id="section-plans">
+      <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary">
+          Our Team
+        </h2>
       </div>
-    </div>
-    <div class="back">
-      <div class="social-media-wrapper">
-        <a href="#" class="social-icon"><i class="fab fa-codepen" aria-hidden="true"></i></a> 
-        <a href="#" class="social-icon"><i class="fab fa-github-square" aria-hidden="true"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-linkedin-square" aria-hidden="true"></i></a>
-         <a href="#" class="social-icon"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+
+      <div class="row">
+        <div class="col-1-of-3">
+          <div class="card">
+            <div class="card__side card__side--front-1">
+              <div class="card__title card__title--1">
+                <img src="images/favicon.png">
+                <h4 class="card__heading">Ved Shah</h4>
+              </div>
+
+              <div class="card__details">
+                <ul>
+                  <li></li>
+                  <li>Backend & Machine Learning</li>
+                  <li>🎓 University of Illinois at Urbana Champaign</li>
+                  <li>📚 CS & Astrophysics</li>
+                  <li>📍 Urbana, Greater Chicago Area</li>
+                  <li></li>
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-1">
+              <div class="card__cta">
+                <div class="card__price-box">
+                  <p class="card__price-only">Find me on</p>
+                </div>
+                <a href="#popup" class="btn btn--white">Github</a>
+                <br>
+                <br>
+                <a href="#popup" class="btn btn--white">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1-of-3">
+          <div class="card">
+            <div class="card__side card__side--front-2">
+              <div class="card__title card__title--2">
+                <i class="fas fa-plane"></i>
+                <h4 class="card__heading">Janhavi</h4>
+              </div>
+
+              <div class="card__details">
+                <ul>
+                  <li>Includes Basic Package Features</li>
+                  <li>Unlimited Websites</li>
+                  <li>Unlimited SSD Storage</li>
+                  <li>Unlimited Domains</li>
+                  <li>Unlimited Parked Domains</li>
+                  <li>Unlimited Sub Domains</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-2">
+              <div class="card__cta">
+                <div class="card__price-box">
+                  <p class="card__price-only">Only</p>
+                  <p class="card__price-value">$5.45/mo*</p>
+                </div>
+                <a href="#popup" class="btn btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1-of-3">
+          <div class="card">
+            <div class="card__side card__side--front-3">
+              <div class="card__title card__title--3">
+                <i class="fas fa-rocket"></i>
+                <h4 class="card__heading">Tanvi</h4>
+              </div>
+
+              <div class="card__details">
+                <ul>
+                  <li>Includes Plus Plan Features</li>
+                  <li>High Performance</li>
+                  <li>2 Spam Experts</li>
+                  <li>Free SSL Certificate</li>
+                  <li>Domain Privacy</li>
+                  <li>Site Backup - CodeGuard Basic</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-3">
+              <div class="card__cta">
+                <div class="card__price-box">
+                  <p class="card__price-only">Only</p>
+                  <p class="card__price-value">$13.95/mo</p>
+                </div>
+                <a href="#popup" class="btn btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-  </div>
-</div>
-
+      <div class="u-center-text u-margin-top-huge">
+        <a href="#" class="btn btn--green">Get Started</a>
+      </div>
+    </section>
+  </body>
+</html>
 <style>
-    $black: #071011;
-$white: #fff;
-$red: tomato;
-$standard: 10px;
-$card-height: 450px;
-$card-width: 300px;
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-
-  background: url("https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?ixlib=rb-0.3.5&s=4222852e25e0f57d9485f7889957e99a&auto=format&fit=crop&w=2000&q=80");
-  background-size: cover;
-  background: #ccc;
-  background-position: 0 50%;
-  background: #DEB493;
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0);
-  }
+    .u-center-text {
+  text-align: center !important;
 }
 
-.outer-div,
-.inner-div {
-  height: $card-height;
-  max-width: $card-width;
-  margin: 0 auto;
-  position: relative;
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
 }
 
-.outer-div {
-  perspective: 900px;
-  perspective-origin: 50% calc(50% - 18em);
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
 }
 
-.inner-div {
-  margin: $standard * 5 auto;
+.u-margin-top-big {
+  margin-top: 5rem !important;
+}
 
-  border-radius: 5px;
+body {
+  font-family: "Lato", sans-serif;
   font-weight: 400;
-  color: $black;
-  font-size: 1rem;
-  text-align: center;
-  transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
-  transform-style: preserve-3d;
-
-  &:hover {
-    transform: rotateY(180deg);
-    background-color: transparent;
-  }
-
-  &:hover .social-icon {
-    opacity: 1;
-    top: 0;
-  }
-
-  &:hover .front__face-photo,
-  &:hover .front__footer {
-    opacity: 0;
-  }
+  line-height: 1.7;
+  color: #fff;
+  background: white;
 }
 
-.front,
-.back {
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  -webkit-animation-name: moveInLeft;
+          animation-name: moveInLeft;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  /*
+        animation-delay: 3s;
+        animation-iteration-count: 3;
+        */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+  -webkit-animation: moveInRight 1s ease-out;
+          animation: moveInRight 1s ease-out;
+}
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  line-height: 1;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #eee;
+}
+
+.btn, .btn:link, .btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 0.5rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   position: relative;
-  top: 0;
-  left: 0;
-  backface-visibility: hidden;
-}
-
-.front {
+  font-size: 1.6rem;
+  border: none;
   cursor: pointer;
-  height: 100%;
-  background: $white;
-  backface-visibility: hidden;
-  border-radius: 5px;
-  box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.front__bkg-photo {
+.btn:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover::after {
+  -webkit-transform: scaleX(1.4) scaleY(1.6);
+          transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn:active, .btn:focus {
+  outline: none;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: #fff;
+  color: #777;
+}
+
+.btn--white::after {
+  background-color: #fff;
+}
+
+.btn--green {
+  background: -webkit-gradient(linear, left top, right top, from(#fc466b), to(#3f5efb));
+  background: linear-gradient(to right, #fc466b, #3f5efb);
+  color: #fff;
+}
+
+.btn--green::after {
+  background-color: #55c57a;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.section-plans {
+  background-color: rgb(255, 255, 255);
+  padding: 4rem 0 4rem 0;
+}
+
+.card {
+  -webkit-perspective: 150rem;
+          perspective: 150rem;
+  -moz-perspective: 150rem;
   position: relative;
-  height: 150px;
-  width: $card-width;
-  background: url("https://images.unsplash.com/photo-1511207538754-e8555f2bc187?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=88672068827eaeeab540f584b883cc66&auto=format&fit=crop&w=1164&q=80")
-    no-repeat;
-  background-size: cover;
-  backface-visibility: hidden;
-  overflow: hidden;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-  }
+  height: 52rem;
 }
 
-.front__face-photo {
-  position: relative;
-  top: -60px;
-  height: 120px;
-  width: 120px;
-  margin: 0 auto;
-  border-radius: 50%;
-  border: 5px solid $white;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/156905/profile/profile-512.jpg?1530296477")
-    no-repeat;
-  background-size: contain;
-  backface-visibility: hidden;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
-  z-index: 3;
-}
-
-.front__text {
-  position: relative;
-  top: -55px;
-  margin: 0 auto;
-  font-family: "Montserrat";
-  font-size: 18px;
-  backface-visibility: hidden;
-
-  .front__text-header {
-    font-weight: 700;
-    font-family: "Oswald";
-    text-transform: uppercase;
-    font-size: 20px;
-  }
-
-  .front__text-para {
-    position: relative;
-    top: -5px;
-
-    color: #000;
-    font-size: 14px;
-    letter-spacing: 0.4px;
-    font-weight: 400;
-    font-family: "Montserrat", sans-serif;
-  }
-
-  .front-icons {
-    position: relative;
-    top: 0;
-    font-size: 14px;
-    margin-right: 6px;
-    color: gray;
-  }
-
-  .front__text-hover {
-    position: relative;
-    top: 10px;
-    font-size: 10px;
-    color: $red;
-    backface-visibility: hidden;
-
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .4px;
-
-    border: 2px solid $red;
-    padding: 8px 15px;
-    border-radius: 30px;
-
-    background: $red;
-    color: $white;
-  }
-}
-
-.back {
-  transform: rotateY(180deg);
+.card__side {
+  height: 52rem;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
-  background-color: $black;
-  border-radius: 5px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+          box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+.card__side--front {
+  background-color: #fff;
+}
+
+.card__side--front-1 {
+  background: linear-gradient(-45deg, #f403d1, #64b5f6);
+}
+
+.card__side--front-2 {
+  background: linear-gradient(-45deg, #f321d7, #ffec61);
+}
+
+.card__side--front-3 {
+  background: linear-gradient(-45deg, #24ff72, #9a4eff);
+}
+
+.card__side--back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.card__side--back-1 {
+  background: linear-gradient(-45deg, #64b5f6, #f403d1);
+}
+
+.card__side--back-2 {
+  background: linear-gradient(-45deg, #ffec61, #f321d7);
+}
+
+.card__side--back-3 {
+  background: linear-gradient(-45deg, #9a4eff, #24ff72);
+}
+
+.card:hover .card__side--front-1,
+.card:hover .card__side--front-2,
+.card:hover .card__side--front-3 {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card:hover .card__side--back {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
+
+.card__title {
+  height: 20rem;
+  padding: 4rem 2rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.social-media-wrapper {
-  font-size: 36px;
-
-  .social-icon {
-    position: relative;
-    top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-    opacity: 0;
-    color: #fff;
-    transition: all 0.4s cubic-bezier(0.3, 0.7, 0.1, 1.9);
-  }
-
-  .social-icon:nth-child(1) {
-    transition-delay: 0.6s;
-  }
-
-  .social-icon:nth-child(2) {
-    transition-delay: 0.7s;
-  }
-
-  .social-icon:nth-child(3) {
-    transition-delay: 0.8s;
-  }
-
-  .social-icon:nth-child(4) {
-    transition-delay: 0.9s;
-  }
+.card__title--1 .fas {
+  font-size: 5rem;
 }
 
-.fab {
-  position: relative;
-  top: 0;
-  left: 0;
-  transition: all 200ms ease-in-out;
+.card__title--2 .fas {
+  font-size: 5rem;
 }
 
-.fab:hover {
-  top: -5px;
+.card__title--3 .fas {
+  font-size: 5rem;
+}
+
+.card__heading {
+  font-size: 4rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  width: 75%;
+}
+
+.card__heading-span {
+  padding: 1rem 1.5rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.card__details {
+  padding: 0 2rem 2rem;
+}
+
+.card__details ul {
+  list-style: none;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card__details ul li {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.card__details ul li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.card__cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+}
+
+.card__price-box {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 8rem;
+}
+
+.card__price-only {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.card__price-value {
+  font-size: 6rem;
+  font-weight: 100;
+}
+
+.row {
+  max-width: 114rem;
+  margin: 0 auto;
+}
+
+.row:not(:last-child) {
+  margin-bottom: 5rem;
+  margin-top: 5rem;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row [class^="col-"] {
+  float: left;
+}
+
+.row [class^="col-"]:not(:last-child) {
+  margin-right: 6rem;
+}
+
+.row .col-1-of-3 {
+  width: calc((100% - 2 * 6rem) / 3);
 }
 
 </style>

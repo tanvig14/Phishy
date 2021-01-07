@@ -66,17 +66,23 @@
     </ul>
   </header>
 
-
   <div id="particle-canvas"></div>
+
   <section class="row home">
 
-    <p>Find out if the site is fish or not</p>
+    <p>Find out if the site is phish or not</p>
 
-    <form>
-      <label>Enter URL</label>
-      <input type="text" id="url"/>
-      <p><input type="submit" id="submiturl"/></p>
-    </form>
+
+    <p><input type="text" placeholder="Enter a valid URL" id="url"/></p>
+    <p><input type="submit" id="submiturl" value="Search"/></p>
+    <img src="" style="width: 25%;" id="result">
+    <p id='report'></p>
+
+
+    <p><b>&lt;/&gt;</b> with <span style="color: #e25555;">&hearts;</span> by <b><a style="color: #56baed;"
+      href="https://github.com/tanvig14" target="_blank">Tanvi</a></b>, <b><a style="color: #56baed;"
+        href="https://github.com/tanvig14" target="_blank">Janhavi</a></b> and <b><a style="color: #56baed;"
+      href="https://github.com/dev-ved30" target="_blank">Ved</a></b></p>
     
 
   </section>
@@ -98,7 +104,7 @@
     var canvasDiv = document.getElementById('particle-canvas');
     var options = {
     particleColor: '#ffffff',
-    background: 'imgg.jpg',
+    background: 'img.jpg',
     interactive: true,
     speed: 'slow',
     density: 'high'
