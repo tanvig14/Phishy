@@ -1,5 +1,12 @@
-
 $(document).ready(function() {
+
+  $("#scroll").click(function() {
+    console.log('here');
+    $('html,body').animate({
+        scrollTop: $("#home").offset().top},
+        'slow');
+  });
+
   $("#submiturl").click(function () {
     var url = $("#url").val();
     document.getElementById('result').src = "images/processing.gif";

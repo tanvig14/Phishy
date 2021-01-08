@@ -67,13 +67,13 @@
   </header>
 
   <section class="row frontpagetext">
-    <h1>Welcome to Phishy</h1>
-    <p>Phishy.ai is a machine learning tool and rest API that allows you to identify phising scams with incredible accuracy</p>
-    <input type="submit" value="Get Started">
+    <h1 class="row">Welcome to Phishy</h1>
+    <p>Phishy.ai is a machine learning tool and Rest API. It can identify phising attempts with incredible accuracy</p>
+    <input type="submit" value="Get Started" id="scroll">
   </section>
   <div id="particle-canvas"></div>
 
-  <section class="row home">
+  <section class="row home" id="home">
 
     <p>Find out if the site is phish or not</p>
 
@@ -112,7 +112,7 @@
     background: 'img.jpg',
     interactive: true,
     speed: 'slow',
-    density: 'high'
+    density: 'medium'
     };
     var particleCanvas = new ParticleNetwork(canvasDiv, options);
 </script>
