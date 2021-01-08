@@ -424,7 +424,13 @@ hr {
   background-color: rgba(0, 0, 0, 0.603);  
   backdrop-filter: blur(4px); 
 }
-
+.header_1 a{
+  color: white;
+  text-decoration: none;
+}
+.header_1 a:hover{
+  color: #56baed;
+}
 ul {
   list-style-type: none;
 }
