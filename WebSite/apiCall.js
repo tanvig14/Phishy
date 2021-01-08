@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
   $("#scroll").click(function() {
-    console.log('here');
     $('html,body').animate({
         scrollTop: $("#home").offset().top},
         'slow');

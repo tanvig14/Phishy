@@ -207,6 +207,7 @@ input[type="button"]:focus {
   background:  linear-gradient(-45deg, #25dbe1, #40e495, #30dd8a, #33eea6);
   box-shadow: 0 4px 15px 0 rgba(206, 206, 206, 0.75);
   color: white;
+  outline:0;
 }
 .button.button-primary,
 button.button-primary,
@@ -214,8 +215,9 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0; }
+  background: white;
+  outline:0;
+ }
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
@@ -227,8 +229,9 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
-  background-color: #1EAEDB;
-  border-color: #1EAEDB; }
+  outline:0;
+  background: white;
+ }
 
 
 /* Forms
@@ -244,6 +247,7 @@ textarea,
 select {
   height: 38px;
   width: 35%;
+  margin-right: 15px;
   align-self: center;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
@@ -418,7 +422,7 @@ hr {
   z-index: 999;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.603);  
-  backdrop-filter: blur(5px); 
+  backdrop-filter: blur(4px); 
 }
 
 ul {
@@ -474,7 +478,7 @@ body{
   cursor: pointer;
   box-sizing: border-box;
 }
-input[type="submit"].frontpagetext:hover{
+ .frontpagetext input[type="submit"]:hover{
   display: inline-block;
   height: 38px;
   padding: 0 30px;
@@ -487,7 +491,7 @@ input[type="submit"].frontpagetext:hover{
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background-color: transparent;
+  background-color: white;
   border-radius: 8px;
   border: 1px solid rgb(255, 255, 255);
   box-shadow: 0 4px 15px 0 rgba(206, 206, 206, 0.75);
