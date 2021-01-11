@@ -40,7 +40,7 @@ x = int_df.values[:,0:14]
 y = int_df.values[:,14]
 
 # Splitting the dataset for training and testing.
-x_tr, x_ts, y_tr, y_ts = train_test_split(x,y,test_size=0.30)
+x_tr, x_ts, y_tr, y_ts = train_test_split(x,y,test_size=0.20)
 
 # Fitting the training data
 model = SVC()
