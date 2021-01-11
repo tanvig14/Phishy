@@ -14,12 +14,7 @@ model = pickle.load(open('../models/final_model.pkl', 'rb'))
 
 @app.route('/', methods=['GET'])
 def home():
-    result = {
-    'working': 'Yes!'}
-    
-    toReturn = jsonify(result)
-    toReturn.headers.add('Access-Control-Allow-Origin', '*')
-    return toReturn
+    return tem
 
 @app.route('/results/', methods=["GET"])
 def results():
@@ -172,7 +167,6 @@ def adv_results():
         csv_file = "data/results.csv"
         with open(csv_file, 'a') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-            writer.writeheader()
             for data in dict_data:
                 writer.writerow(data)
 
@@ -260,7 +254,6 @@ def logReport():
         csv_file = "data/reports.csv"
         with open(csv_file, 'a') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-            writer.writeheader()
             for data in dict_data:
                 writer.writerow(data)
 
