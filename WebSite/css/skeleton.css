@@ -414,10 +414,10 @@ hr {
 
 .header_1 {
   height: fit-content;
-  padding-right: 0.4em;
   padding-top: 3em;
   padding-bottom: 0.4em;
   margin-bottom: 5%;
+  text-align: center;
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -426,6 +426,8 @@ hr {
 }
 .header_1 a{
   color: white;
+  font-weight: bold;
+  text-align: center;
   text-decoration: none;
 }
 .header_1 a:hover{
@@ -454,7 +456,6 @@ body{
   justify-content: center;
   z-index: 998;
   width: 40%;
-  height: 50%;
   background-color: rgba(0, 0, 0, 0);  
   text-align:center; 
 }
@@ -507,9 +508,28 @@ body{
 
 .home{
   background-color: white;
-  height: 78%;
+  min-height: 60%;
+  height: fit-content;
   text-align: center;
   padding-top: 4em;
+}
+.footer_1{
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.603);  
+  backdrop-filter: blur(4px); 
+  color: white;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.footer_1 p{
+  color: white;
+  text-decoration: none;
+}
+.footer_1 a{
+  font-weight: bold;
+  color: #56baed;
+  text-decoration: none;
 }
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
