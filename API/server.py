@@ -5,6 +5,7 @@ from flask import jsonify, request
 sys.path.append("..")
 from src.extract import extractAllFeatures
 import csv
+import time
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -42,7 +43,9 @@ def results():
             if int(val) == prediction[0]:
                 counter = counter + 1
             
-        csv_columns = ["URL",
+        csv_columns = [
+            "Time",
+            "URL",
             "having_IP_Address",
             "URL_Length",
             "Shortining_Service",
@@ -60,7 +63,9 @@ def results():
             "Result"
             ]
         dict_data = [
-            {'URL':URL,         
+            {
+            'Time':time.localtime(),
+            'URL':URL,         
             "having_IP_Address": features["having_IP_Address"],
             "URL_Length": features["URL_Length"],
             "Shortining_Service": features["Shortining_Service"],
@@ -125,7 +130,9 @@ def adv_results():
             if int(val) == prediction[0]:
                 counter = counter + 1
 
-        csv_columns = ["URL",
+        csv_columns = [
+            "Time",
+            "URL",
             "having_IP_Address",
             "URL_Length",
             "Shortining_Service",
@@ -143,7 +150,9 @@ def adv_results():
             "Result"
             ]
         dict_data = [
-            {'URL':URL,         
+            {
+            'Time':time.localtime(),
+            'URL':URL,         
             "having_IP_Address": features["having_IP_Address"],
             "URL_Length": features["URL_Length"],
             "Shortining_Service": features["Shortining_Service"],
@@ -163,6 +172,7 @@ def adv_results():
         csv_file = "data/results.csv"
         with open(csv_file, 'a') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
             for data in dict_data:
                 writer.writerow(data)
 
@@ -190,6 +200,90 @@ def adv_results():
 @app.route('/sendIt/', methods=["GET"])
 def sendIt():
     print("Send it")
+
+@app.route('/report/', methods=["GET"])
+def logReport():
+    requestData = request.args
+    URL = requestData.get("url")
+
+    try:
+        features = extractAllFeatures(URL)
+        del features['Domain_registration_length']
+        list = [features[x] for x in features]
+        featureList = [list]
+
+        prediction = model.predict(featureList)
+        counter = 0
+        for val in list:
+            if int(val) == prediction[0]:
+                counter = counter + 1
+
+        csv_columns = [
+            "Time",
+            "URL",
+            "having_IP_Address",
+            "URL_Length",
+            "Shortining_Service",
+            "having_At_Symbol",
+            "double_slash_redirecting",
+            "Prefix_Suffix",
+            "having_Sub_Domain",
+            "SSLfinal_State",
+            "Favicon",
+            "port",
+            "HTTPS_token",
+            "Submitting_to_email",
+            "Redirect",
+            "age_of_domain",
+            "Result"
+            ]
+        dict_data = [
+            {
+            "Time": time.localtime(),    
+            'URL':URL,         
+            "having_IP_Address": features["having_IP_Address"],
+            "URL_Length": features["URL_Length"],
+            "Shortining_Service": features["Shortining_Service"],
+            "having_At_Symbol": features["having_At_Symbol"],
+            "double_slash_redirecting": features["double_slash_redirecting"],
+            "Prefix_Suffix": features["Prefix_Suffix"],
+            "having_Sub_Domain": features["having_Sub_Domain"],
+            "SSLfinal_State": features["SSLfinal_State"],
+            "Favicon": features["Favicon"],
+            "port": features["port"],
+            "HTTPS_token": features["HTTPS_token"],
+            "Submitting_to_email": features["Submitting_to_email"],
+            "Redirect": features["Redirect"],
+            "age_of_domain": features["age_of_domain"],
+            "Result": prediction[0],}
+            ]
+        csv_file = "data/reports.csv"
+        with open(csv_file, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
+            for data in dict_data:
+                writer.writerow(data)
+
+        result = {
+            'URL': URL,
+            'Logged': True,
+            'Time': time.localtime(),
+        }
+        
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
+    except:
+        result = {
+            'URL': URL,
+            'Logged': False,
+            'Time': time.localtime(),
+        }
+
+        toReturn = jsonify(result)
+        toReturn.headers.add('Access-Control-Allow-Origin', '*')
+        return toReturn
+    
 
 
 app.run()
