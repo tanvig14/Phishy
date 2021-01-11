@@ -48,6 +48,7 @@ $(document).ready(function() {
   });
 
   $("#report").click(function() {
+    $('#report').html("<img src=\"images/adding.gif\" style=\"width: 10%;\">");
     var url = $("#url").val();
     console.log(url)
 
