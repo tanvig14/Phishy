@@ -4,6 +4,7 @@ import pickle
 from flask import jsonify, request
 sys.path.append("..")
 from src.extract import extractAllFeatures
+import csv
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -40,6 +41,47 @@ def results():
         for val in list:
             if int(val) == prediction[0]:
                 counter = counter + 1
+            
+        csv_columns = ["URL",
+            "having_IP_Address",
+            "URL_Length",
+            "Shortining_Service",
+            "having_At_Symbol",
+            "double_slash_redirecting",
+            "Prefix_Suffix",
+            "having_Sub_Domain",
+            "SSLfinal_State",
+            "Favicon",
+            "port",
+            "HTTPS_token",
+            "Submitting_to_email",
+            "Redirect",
+            "age_of_domain",
+            "Result"
+            ]
+        dict_data = [
+            {'URL':URL,         
+            "having_IP_Address": features["having_IP_Address"],
+            "URL_Length": features["URL_Length"],
+            "Shortining_Service": features["Shortining_Service"],
+            "having_At_Symbol": features["having_At_Symbol"],
+            "double_slash_redirecting": features["double_slash_redirecting"],
+            "Prefix_Suffix": features["Prefix_Suffix"],
+            "having_Sub_Domain": features["having_Sub_Domain"],
+            "SSLfinal_State": features["SSLfinal_State"],
+            "Favicon": features["Favicon"],
+            "port": features["port"],
+            "HTTPS_token": features["HTTPS_token"],
+            "Submitting_to_email": features["Submitting_to_email"],
+            "Redirect": features["Redirect"],
+            "age_of_domain": features["age_of_domain"],
+            "Result": prediction[0],}
+            ]
+        csv_file = "data/results.csv"
+        with open(csv_file, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            for data in dict_data:
+                writer.writerow(data)
 
         result = {
             'URL': URL,
@@ -82,6 +124,47 @@ def adv_results():
         for val in list:
             if int(val) == prediction[0]:
                 counter = counter + 1
+
+        csv_columns = ["URL",
+            "having_IP_Address",
+            "URL_Length",
+            "Shortining_Service",
+            "having_At_Symbol",
+            "double_slash_redirecting",
+            "Prefix_Suffix",
+            "having_Sub_Domain",
+            "SSLfinal_State",
+            "Favicon",
+            "port",
+            "HTTPS_token",
+            "Submitting_to_email",
+            "Redirect",
+            "age_of_domain",
+            "Result"
+            ]
+        dict_data = [
+            {'URL':URL,         
+            "having_IP_Address": features["having_IP_Address"],
+            "URL_Length": features["URL_Length"],
+            "Shortining_Service": features["Shortining_Service"],
+            "having_At_Symbol": features["having_At_Symbol"],
+            "double_slash_redirecting": features["double_slash_redirecting"],
+            "Prefix_Suffix": features["Prefix_Suffix"],
+            "having_Sub_Domain": features["having_Sub_Domain"],
+            "SSLfinal_State": features["SSLfinal_State"],
+            "Favicon": features["Favicon"],
+            "port": features["port"],
+            "HTTPS_token": features["HTTPS_token"],
+            "Submitting_to_email": features["Submitting_to_email"],
+            "Redirect": features["Redirect"],
+            "age_of_domain": features["age_of_domain"],
+            "Result": prediction[0],}
+            ]
+        csv_file = "data/results.csv"
+        with open(csv_file, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            for data in dict_data:
+                writer.writerow(data)
 
         result = {
             'URL': URL,
