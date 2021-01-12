@@ -1,9 +1,15 @@
 # Phishy
 
+![image](img/home.png)
+
 Phishing scams have become a huge problem in today's online landscape. 1 in every 8 employees shares information to a phishing site,
 more than 60,000 phishing websites were reported in March 2020 alone and 22% of all data breaches in 2020 involved phishing attacks. This makes dealing with Phishing sites extremely important and the development of robust anti-phishing tools is a great place to start. That's where `Phishy` comes in.
 
+![image](img/search.png)
+
 Phishy is a machine learning tool and Rest API. It can identify phising attempts with incredible accuracy and provide valuable insights into the authenticity of websites.
+
+![image](img/result.png)
 
 ## Background
 
