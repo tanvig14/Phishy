@@ -34,3 +34,15 @@ To add a new feature (assuming you are inside the project directory):
     * Whenever possible create small pull requests. Smaller additions and modifications are easier to review, so it's better not to open pull requests that make multiple huge changes all at once.
     * If you're in the middle of implementing some feature on a branch and a pull request is closed in the master branch,
     you should (assuming you're on your feature branch) run `git pull origin master` and then resolve any merge conflicts that arise.
+
+## Project Structure
+
+In this section, we will briefly explain the project structure for Phishy. 
+
+* Phishy/API: Contains our flask `server.py` file. The `data` directory inside API contains some of our logging files.
+* Phishy/data: Contains the data we used to train and validate our SVM model in .arff and .csv formats. This data was aquired through `UC Irvine's Machine Learning Repository`.
+* Phishy/Docs: Contains the documentation for all our python code.
+* Phishy/models: Contains the models we are using for our classification problem in .pkl format along with the performance stats in text files.
+* Phishy/src: Contains most of the source code for the project. `extract.py` contains all the feature extraction functions. `train.py` and `train_weighted.py` contains the code we used to train the model.
+* Phishy/WebSite: Contains all the code for our official website.
+

@@ -7,7 +7,7 @@ Phishy is a machine learning tool and Rest API. It can identify phising attempts
 
 ## Background
 
-While building Phishy, we used a diverse tech stack to develop a comprehensive feature extraction toolkit and implemented an SVM model to classify a given website as `Safe` or `Phishy`. The features we used for our model are based on [research](https://archive.ics.uci.edu/ml/datasets/phishing+websites#) which narrowed down the identifying characteristics of malicious website. You can find the documentation for the features we used [here](). 
+While building Phishy, we used a diverse tech stack to develop a comprehensive feature extraction toolkit and implemented an SVM model to classify a given website as `Safe` or `Phishy`. The features we used for our model are based on [research](https://archive.ics.uci.edu/ml/datasets/phishing+websites#) which narrowed down the identifying characteristics of malicious website. You can find the documentation for the features we used [here](https://github.com/tanvig14/Phishy/blob/main/FEATURES.md). 
 
 Our model was trained on data from `UC Irvine's Machine Learning Repository`. You can find more information [here](https://archive.ics.uci.edu/ml/datasets/phishing+websites#). This dataset has over eleven thousand entries, each one contaning thirty features and a final result that tells us whether the website is a Phish or not. 
 
@@ -35,7 +35,7 @@ If you like this approach to software development, please consider supporting us
 
 If you want to contribute to Phishy, use our code for your project or just mess around with the code, you can follow the instructions below to get Phishy up and running on your computer.
 
-This guide primarily explains how you can get the API working locally. We expect this would be the most common way to ineract with Phishy's backend. If you want to use Phishy in a different way, you can check out our [Project Structure]() file.
+This guide primarily explains how you can get the API working locally. We expect this would be the most common way to ineract with Phishy's backend. If you want to use Phishy in a different way, you can check out our Project Structure in the [CONTRIBUTING.md](https://github.com/tanvig14/Phishy/blob/main/CONTRIBUTING.md) file.
 
 ### 1. Setting up the virtual env and cloning the repository.
 

@@ -5,7 +5,7 @@ In order to make access to Phishy's technology easy and platform agnostic, we de
 Phishy's functionality can be accessed through a REST API. Consult our documentation if you'd like to get started. If you run into an issues, you can report them on our GitHub. You can also use our Advance Results API to get insights into what tests a given website passed or failed. As we continue development, we intend on adding more comprehensive API's to Phishy.
 
 ## What do you mean by features?
-In order to achieve our promising results we had to build custom feature extraction tools. These features were then used for binary classification using an SVM model trained on similar data from UC Irvine's ML Repository. In addition to phishing detection, this data can be used for other application. To serve this purpose, all the feature extraction results can be accessed through the Advance Results API. We have also detailed all the features we used for Phishy here.
+In order to achieve our promising results we had to build custom feature extraction tools. These features were then used for binary classification using an SVM model trained on similar data from UC Irvine's ML Repository. In addition to phishing detection, this data can be used for other application. To serve this purpose, all the feature extraction results can be accessed through the Advance Results API. We have also detailed all the features we used for Phishy [here](https://github.com/tanvig14/Phishy/blob/main/FEATURES.md).
 
 
 ## Usage:
