@@ -22,7 +22,7 @@ https://phishy.ai/status/
 ```
 
 JSON :
-```json
+```
 {
   Status: 1,
 }
@@ -40,7 +40,7 @@ Example :
 https://phishy.ai/results/?url=Enter url here
 ```
 JSON :
-```json
+```
 {
   URL: 'https://phishy.ai/',
   Result: 1,
@@ -59,7 +59,7 @@ Example :
 https://phishy.ai/adv_results/?url=Enter url here
 ```
 JSON :
-```json
+```
 {
   URL: 'https://www.youtube.com/',
   Result: 1,
@@ -68,7 +68,7 @@ JSON :
 }
 ```
 Features :
-```json
+```
 {
   Favicon: 1,
   HTTPS_token: 1,
