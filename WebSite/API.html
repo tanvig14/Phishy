@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Phishy 🐡</title>
+  <title>Phishy.ai</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,7 +25,7 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 
 <body>
@@ -47,11 +47,9 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <header class="row header_1">
     <ul>
-      <li class="nine columns">
-        <p>
-          <a href="index.html">Phishy.ai</a>
-          <img>
-        </p>
+
+      <li class="eight columns logo">
+        <img src="images/logo.png" style="width: 4em;">
       </li>
 
       <li class="one column tabs">
@@ -62,11 +60,11 @@
 
       <li class="one column tabs">
           <p class="tabs">
-            <a href="team.html">Team</a>
+            <a href="https://github.com/tanvig14/Phishy" target="_blank">GitHub</a>
           </p>
       </li>
 
-      <li class="one column tabs">
+      <li class="two columns tabs">
         <p class="tabs">
           <a href="API.html">API</a>
         </p>
@@ -74,6 +72,166 @@
 
     </ul>
   </header>
+
+  <section class="row api">
+
+    <h1>
+      <b>Phishy API</b>
+    </h1>
+    <img src="images/logo-color.png" class='search-logo' style="width: 6%;">
+
+    <section class="row details">
+      <p>
+        <h1>What is the Phishy API?</h1>
+        <p>
+          In order to make access to Phishy's technology easy and platform agnostic, we developed an API. This allows us
+          to allows us to improve our model and ensure that everyone who uses Phishy can benefit from the enhancements
+          without having to make any changes to their projects. We plan on using this API for our Chrome Extension and 
+          possibly even our mobile apps.
+        </p>
+      </p>
+      <p>
+        <h1>How can I use it?</h1>
+        <p>
+          Phishy's functionality can be accessed through a REST API. Consult our documentation if you'd 
+          like to get started. If you run into an issues, you can report them on our GitHub. You can also
+          use our Advance Results API to get insights into what tests a given website passed or failed. 
+          As we continue development, we intend on adding more comprehensive API's to Phishy.
+        </p>
+      </p>
+      <p>
+        <h1>What do you mean by features?</h1>
+        <p>
+          In order to achieve our promising results we had to build custom feature extraction tools. These features were then
+          used for binary classification using an SVM model trained on similar data from UC Irvine's ML Repository.
+          In addition to phishing detection, this data can be used for other application. To serve this purpose,
+          all the feature extraction results can be accessed through the Advance Results API. We have also detailed all the 
+          features we used for Phishy here.
+        </p>
+      </p>
+      <br>
+      <h1>
+        <b>Usage:</b>
+      </h1>
+      <br>
+      <p>
+        <h1>1. Status</h1>
+        <p>
+          This API call provides the status of the server. The JSON contains the following.
+          <ul>
+            <li>1. Status: Returns 1 if the server is operating as expected</li>
+          </ul>
+        </p>
+        <p>
+          <p>Example :</p>
+          <p>
+            <a>https://phishy.ai/status/</a>
+          </p>
+          <p>JSON :</p>
+          <section class="json">
+            <p>
+              {<br>
+                &emsp; Status: 1,<br>
+              }
+            </p>
+          </section>
+
+        </p>
+      </p>
+      <p>
+        <h1>2. Regular Result</h1>
+        <p>
+          This API call provides the basic results for a given URL. The JSON contains the following.
+          <ul>
+            <li>1. Confidence Score: Returns a metric that indicates how confident we are with our models prediction.</li>
+            <li>2. Result: Returns 1 if the website is safe, 0 if the test is inconclusive and -1 if it's a phish.</li>
+            <li>3. URL: Returns the URL on which the model was run.</li>
+          </ul>
+        </p>
+        <p>
+          <p>Example :</p>
+          <p>
+            <a>https://phishy.ai/results/?url=<i>Enter url here</i></a>
+          </p>
+          <p>JSON :</p>
+          <section class="json">
+            <p>
+              {<br>
+                &emsp; URL: 'https://phishy.ai/',<br>
+                &emsp; Result: 1,<br>
+                &emsp; Confidence Score: 0.96<br>
+              }
+            </p>
+          </section>
+
+        </p>
+      </p>
+      <p>
+        <h1>3. Advance Result</h1>
+        <p>
+          This API call provides advance results for a given URL. The JSON contains the following.
+          <ul>
+            <li>1. Confidence Score: Returns a metric that indicates how confident we are with our models prediction.</li>
+            <li>2. Result: Returns 1 if the website is safe, 0 if the test is inconclusive and -1 if it's a phish.</li>
+            <li>3. URL: Returns the URL on which the model was run.</li>
+            <li>4. Features: Returns a list of features that were extracted before running the model. For every feature, 1 means safe and -1 means unsafe. null indicates an inconclusive test.</li>
+          </ul>
+        </p>
+        <p>
+          <p>Example :</p>
+          <p>
+            <a>https://phishy.ai/adv_results/?url=<i>Enter url here</i></a>
+          </p>
+          <p>JSON :</p>
+          <section class="json">
+            <p>
+              {<br>
+                &emsp; URL: 'https://www.youtube.com/',<br>
+                &emsp; Result: 1,<br>
+                &emsp; Confidence Score: 1,<br>
+                &emsp; Features: {…}<br>
+              }
+            </p>
+          </section>
+          <br>
+          <p>Features :</p>
+          <section class="json">
+            <p>
+              {<br>
+                &emsp; Favicon: 1,<br>
+                &emsp; HTTPS_token: 1,<br>
+                &emsp; Prefix_Suffix: 1,<br>
+                &emsp; Redirect: 1,<br>
+                &emsp; SSLfinal_State: 1,<br>
+                &emsp; Shortining_Service: 1,<br>
+                &emsp; Submitting_to_email: 1,<br>
+                &emsp; URL_Length: 1,<br>
+                &emsp; age_of_domain: 1,<br>
+                &emsp; double_slash_redirecting: 1,<br>
+                &emsp; having_At_Symbol: 1,<br>
+                &emsp; having_IP_Address: 1,<br>
+                &emsp; having_Sub_Domain: 1,<br>
+                &emsp; port: 1,<br>
+              }<br>
+            </p>
+          </section>
+
+        </p>
+      </p>
+    </section>
+
+  </section>
+
+
+  <footer class="row footer_1">
+    <p>
+      <b>&lt;/&gt;</b> with <span style="color: #e25555;">&hearts;</span> by 
+      <a style="color: #56baed;" href="https://www.linkedin.com/in/tanvi-gandhi14/" target="_blank">Tanvi </a>| 
+      <a style="color: #56baed;" href="https://www.linkedin.com/in/janhavi-shah-615396193/" target="_blank"> Janhavi </a>|
+      <a style="color: #56baed;" href="https://www.linkedin.com/in/ved-shah-852a52181/" target="_blank"> Ved</a>
+    </p>
+    
+  </footer>
 
 </body>
 

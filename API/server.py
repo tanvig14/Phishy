@@ -21,6 +21,15 @@ def home():
     toReturn.headers.add('Access-Control-Allow-Origin', '*')
     return toReturn
 
+@app.route('/status/', methods=['GET'])
+def status():
+    result = {
+            'Status': 1,
+    }
+
+    toReturn = jsonify(result)
+    toReturn.headers.add('Access-Control-Allow-Origin', '*')
+    return toReturn
 @app.route('/results/', methods=["GET"])
 def results():
     """

@@ -540,6 +540,43 @@ body{
   padding-top: 0.5em;
   padding-bottom: 2.5em;
 }
+.api{
+
+  background-color: white;
+  height: fit-content;
+  text-align: center;
+  padding-top: 8em;
+}
+.details{
+  background-color: white;
+  height: fit-content;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-bottom: 4em;
+  text-align: left;
+}
+.details a{
+  color: black;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 15px 0 rgba(206, 206, 206, 0.75);
+  height: fit-content;
+  width: fit-content;
+  max-width: 10%;
+  padding: 0.5em 2em;
+  text-align: center;
+}
+.details i{
+  color: #56baed;
+}
+.json{
+  color: black;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 15px 0 rgba(206, 206, 206, 0.75);
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5em 2em;
+  text-align: left;
+}
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
