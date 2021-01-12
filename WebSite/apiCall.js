@@ -24,17 +24,17 @@ $(document).ready(function() {
     request.done (function (msg) {
       console.log(msg);
       if(msg['Result'] == 1){
-        document.getElementById('result').src = "images/safe.gif";
+        document.getElementById('result').src = "";
         $('#report').html("<input type=\"submit\" id=\"report\" value=\"Think we made a mistake? Click Here\"/>");
         $('#result_msg').html("This website appers to be <b style='color:#40e495'>Safe</b>");
       }
       if(msg['Result'] == -1){
-        document.getElementById('result').src = "images/phish.gif";
+        document.getElementById('result').src = "";
         $('#report').html("<input type=\"submit\" id=\"report\" value=\"Think we made a mistake? Click Here\"/>");
         $('#result_msg').html("This website appers to be a <b style='color:#f53c2f'>Phish</b><br>Do not enter any sensitive data on this website")
       }
       if(msg['Result'] == 0){
-        document.getElementById('result').src = "images/inconclusive.gif";
+        document.getElementById('result').src = "";
         $('#result_msg').html("Our tests were <b style='color:#ff9900'>Inconclusive</b><br> We would caution against entering any sensitive data on this website")
       }
       

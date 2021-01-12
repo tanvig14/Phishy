@@ -413,11 +413,9 @@ hr {
 }
 
 .header_1 {
+  vertical-align: middle;
   height: fit-content;
-  padding-top: 3em;
-  padding-bottom: 0.4em;
   margin-bottom: 5%;
-  text-align: center;
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -441,6 +439,8 @@ ul {
   font-size: 1.1em;
   font-weight: 300;
   color: white;
+  padding-top: 0.8em;
+  padding-left: 1em;
 }
 
 body{
@@ -508,7 +508,7 @@ body{
 
 .home{
   background-color: white;
-  min-height: 60%;
+  min-height: 68%;
   height: fit-content;
   text-align: center;
   padding-top: 4em;
@@ -519,8 +519,8 @@ body{
   backdrop-filter: blur(4px); 
   color: white;
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 10px;
+  padding-top: 1.8em;
+  padding-bottom: 1em;
 }
 .footer_1 p{
   color: white;
@@ -530,6 +530,15 @@ body{
   font-weight: bold;
   color: #56baed;
   text-decoration: none;
+}
+
+.logo {
+  padding-top: 1em;
+  padding-left: 3em;
+}
+.search-logo {
+  padding-top: 0.5em;
+  padding-bottom: 2.5em;
 }
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

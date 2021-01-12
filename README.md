@@ -13,11 +13,11 @@ Our model was trained on data from `UC Irvine's Machine Learning Repository`. Yo
 
 For our purpose, we narrowed the data down to 14 relevant features before training and validating our model. As it naturally follows, our extraction tools enable the discovery of the same features to facilitate the binary classification.
 
-This implementation gave us promising results. After splitting our data in 80:20 ratio for training : testing, we were able to achieve the following statistics:
-*`Accuracy: 0.9072817729534147`
-*`F1 Score: 0.9186830622768742`
-*`Precison: 0.9004665629860031`
-*`Recall: 0.9376518218623482`
+This implementation gave us promising results. After splitting our data in a 80:20 ratio for training : testing, we were able to achieve the following statistics:
+* `Accuracy: 0.9072817729534147`
+* `F1 Score: 0.9186830622768742`
+* `Precison: 0.9004665629860031`
+* `Recall: 0.9376518218623482`
 
 ## API
 
@@ -33,11 +33,11 @@ If you like this approach to software development, please consider supporting us
 
 ## Using Locally
 
-If you want to contribute to Phishy, use our code for your project or just nerd out, you can follow the instructions below to get Phishy up and running on your computer.
+If you want to contribute to Phishy, use our code for your project or just mess around with the code, you can follow the instructions below to get Phishy up and running on your computer.
 
 This guide primarily explains how you can get the API working locally. We expect this would be the most common way to ineract with Phishy's backend. If you want to use Phishy in a different way, you can check out our [Project Structure]() file.
 
-### Setting up the virtual env and cloning the repository.
+### 1. Setting up the virtual env and cloning the repository.
 
 Assuming you have pip, git and an appropriate version of python.
 
@@ -50,7 +50,7 @@ Then, clone the repo with: `git clone https://github.com/tanvig14/Phishy.git` or
 
 **Note:** We are using `python 3.7.x` for testing.
 
-### Adding the correct web driver for Selenium
+### 2. Adding the correct web driver for Selenium
 
 Phishy relies on `Selenium` and uses the `Chrome` web driver to extract some of the features. This means that we need to have the appropriate drivers. You can refer to `Selenium's` documentation to make sure you are doing this step correctly. You can also find the Chrome drivers [here](https://sites.google.com/a/chromium.org/chromedriver/downloads). 
 
@@ -58,7 +58,7 @@ Once you have the appropriate driver for your operating system and web browser, 
 
 **Note:** All our testing was done on MacOS Big Sur with Chrome 87
 
-### Running Phisy
+### 3. Running Phisy
 
 From the repo on your computer, go to `API` and run:
 

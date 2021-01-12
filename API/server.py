@@ -1,7 +1,7 @@
 import flask
 import sys
 import pickle
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 sys.path.append("..")
 from src.extract import extractAllFeatures
 import csv
@@ -14,7 +14,12 @@ model = pickle.load(open('../models/final_model.pkl', 'rb'))
 
 @app.route('/', methods=['GET'])
 def home():
-    return tem
+    result = {
+    'working': True}
+
+    toReturn = jsonify(result)
+    toReturn.headers.add('Access-Control-Allow-Origin', '*')
+    return toReturn
 
 @app.route('/results/', methods=["GET"])
 def results():
