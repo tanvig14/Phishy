@@ -443,8 +443,15 @@ hr {
     height: 50%;
     width: 100%;
   }
+
+  #particle-canvas {
+    width: 100%;
+    height: 110%;
+    text-align: center;
+    }
   
   .frontpagetext {
+    min-height: 110%;
     height: fit-content;
     color: white;
     position: absolute;
@@ -588,13 +595,13 @@ hr {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.603);  
     backdrop-filter: blur(4px); 
+    padding-right: 3em;
   }
   .header_1 a{
     color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    padding: 0 1em;
   }
   .header_1 a:hover{
     color: #56baed;
@@ -691,8 +698,8 @@ hr {
     backdrop-filter: blur(4px); 
     color: white;
     text-align: center;
-    padding-top: 1.8em;
-    padding-bottom: 1em;
+    padding-top: 2em;
+    padding-bottom: 0.9em;
   }
   .footer_1 p{
     color: white;
