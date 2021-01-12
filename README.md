@@ -83,8 +83,8 @@ If you like what we're doing and want to contribute to the project, please refer
 ## Team
 This Project was created by:
 
-* [Ved Shah]() [Backend & Machine Learning]
-* [Janhavi Shah]() [UX, Frontend & Graphics]
-* [Tanvi Gandhi]() [Backend & Machine Learning]
+* [Ved Shah](https://www.linkedin.com/in/ved-shah-852a52181/) [Backend & Machine Learning]
+* [Janhavi Shah](https://www.linkedin.com/in/janhavi-shah-615396193/) [UX, Frontend & Graphics]
+* [Tanvi Gandhi](https://www.linkedin.com/in/tanvi-gandhi14/) [Backend & Machine Learning]
 
 Please feel free to reach out to any of us if you have any questions about Phishy or if you want to nerd out in general. 
