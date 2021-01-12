@@ -41,7 +41,7 @@ $(document).ready(function() {
     });
 
     request.fail (function (jqXHR, testStatus) {
-      alert("Server did not respond. We are working on a fix!");
+      document.getElementById('result').src = "";
       $('#result_msg').html("Looks like something went wrong!<br>We are working on a fix")
     });
 
