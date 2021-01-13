@@ -418,6 +418,7 @@ hr {
     background-color: rgba(0, 0, 0, 0.603);  
     backdrop-filter: blur(4px); 
     text-align: center;
+    margin-bottom: 5em;
   }
   .header_1 a{
     color: white;
@@ -440,18 +441,20 @@ hr {
   body{
     font-family: 'Nunito Sans', sans-serif;
     background: linear-gradient(-45deg,#FEAC5E, #C779D0, #4BC0C8);
-    height: 50%;
+    height: 100%;
     width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   #particle-canvas {
     width: 100%;
-    height: 110%;
+    height: 100%;
     text-align: center;
     }
   
   .frontpagetext {
-    min-height: 110%;
+    min-height: 100%;
     height: fit-content;
     color: white;
     position: absolute;
@@ -512,8 +515,8 @@ hr {
   
   .home{
     background-color: white;
-    height: fit-content;
     text-align: center;
+    min-height: 80%;
     padding-top: 4em;
   }
   .footer_1{
