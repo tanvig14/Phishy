@@ -7,7 +7,7 @@ more than 60,000 phishing websites were reported in March 2020 alone and 22% of 
 
 ![image](img/search.png)
 
-Phishy is a machine learning tool and Rest API. It can identify phising attempts with incredible accuracy and provide valuable insights into the authenticity of websites.
+Phishy is a machine learning tool and Rest API. It can identify phishing attempts with incredible accuracy and provide valuable insights into the authenticity of websites.
 
 ![image](img/result.png)
 
