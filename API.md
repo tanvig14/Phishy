@@ -18,7 +18,7 @@ This API call provides the status of the server. The JSON contains the following
 Example :
 
 ```
-https://phishy.ai/status/
+https://phishy-ai.herokuapp.com/status/
 ```
 
 JSON :
@@ -37,14 +37,14 @@ This API call provides the basic results for a given URL. The JSON contains the 
 
 Example :
 ```
-https://phishy.ai/results/?url=Enter url here
+https://phishy-ai.herokuapp.com/results/?url=https://www.youtube.com/
 ```
 JSON :
 ```
 {
-  URL: 'https://phishy.ai/',
+  URL: 'https://www.youtube.com/',
   Result: 1,
-  Confidence Score: 0.96
+  Confidence Score: 1.0
 }
 ```
 ### 3. Advance Result
@@ -56,7 +56,7 @@ This API call provides advance results for a given URL. The JSON contains the fo
 4. Features: Returns a list of features that were extracted before running the model. For every feature, 1 means safe and -1 means unsafe. null indicates an inconclusive test.
 Example :
 ```
-https://phishy.ai/adv_results/?url=Enter url here
+https://phishy-ai.herokuapp.com/adv_results/?url=https://www.youtube.com/
 ```
 JSON :
 ```
