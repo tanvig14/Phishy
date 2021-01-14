@@ -27,7 +27,7 @@ This implementation gave us promising results. After splitting our data in a 80:
 
 ## API
 
-We plan on making Phishy's technology as platform agnostic as possible. That's why we have deployed it as a `Rest API`. You can find more information about the API on our [Website]() or by clicking [here](https://github.com/tanvig14/Phishy/blob/main/API.md). We plan on using the same API to develop our Chrome extension and possibly our mobile applications. 
+We plan on making Phishy's technology as platform agnostic as possible. That's why we have deployed it as a `Rest API`. You can find more information about the API on our [Website](https://phishy-ai.herokuapp.com/) or by clicking [here](https://github.com/tanvig14/Phishy/blob/main/API.md). We plan on using the same API to develop our Chrome extension and possibly our mobile applications. 
 
 The API also allows us to keep improving our model and ensuring that everyone who uses Phishy can benefit from the enhancements without having to make any changes to their projects. However, we understand that this implementation may not be the right choice for everyone which is why our code is open source and can be used in a manner you see fit for your own projects. 
 
