@@ -16,16 +16,16 @@
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/normalize.css') }}">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="icon" type="image/png" href="{{ url_for('static',filename='images/logo.png') }}">
 </head>
 
 <body>
@@ -34,58 +34,54 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <!-- Importing Java Script to Call the API
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <script src="apiCall.js" type="text/javascript"></script>
-
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/background.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/background.css') }}">
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <header class="row header_1">
-    <li class="one column logo">
-      <a href="index.html">
-        <img src="images/logo.png"  style="width: 4em;">
-      </a>
-    </li>
+      <li class="one column logo">
+        <a href="/">
+          <img src="{{ url_for('static',filename='images/logo.png') }}"  style="width: 4em;">
+        </a>
+      </li>
 
-    <li class="eight columns"></li>
+      <li class="eight columns"></li>
 
-    <li class="one column tabs">
-      <p class="tabs">
-        <a href="index.html">Home</a>
-      </p>
-    </li>
-
-    <li class="one column tabs">
+      <li class="one column tabs">
         <p class="tabs">
-          <a href="https://github.com/tanvig14/Phishy" target="_blank">GitHub</a>
+          <a href="/">Home</a>
         </p>
-    </li>
+      </li>
 
-    <li class="one columns tabs">
-      <p class="tabs">
-        <a href="API.html">API</a>
-      </p>
-    </li>
+      <li class="one column tabs">
+          <p class="tabs">
+            <a href="https://github.com/tanvig14/Phishy" target="_blank">GitHub</a>
+          </p>
+      </li>
+
+      <li class="one columns tabs">
+        <p class="tabs">
+          <a href="api">API</a>
+        </p>
+      </li>
   </header>
+
 
   <section class="row api">
 
     <h1>
       <b>Phishy API</b>
     </h1>
-    <img src="images/logo-color.png" class='search-logo' style="width: 5em;">
+    <img src="{{ url_for('static',filename='images/logo-color.png') }}" class='search-logo' style="width: 5em;">
 
     <section class="row details">
       <p>
         <h1>What is the Phishy API?</h1>
         <p>
-          In order to make access to Phishy's technology easy and platform agnostic, we developed an API. This allows us
-          to allows us to improve our model and ensure that everyone who uses Phishy can benefit from the enhancements
+          In order to make access to Phishy's technology easy and platform agnostic, we developed an API. This allows us 
+          to improve our model and ensure that everyone who uses Phishy can benefit from the enhancements
           without having to make any changes to their projects. We plan on using this API for our Chrome Extension and 
           possibly even our mobile apps.
         </p>
@@ -94,9 +90,9 @@
         <h1>How can I use it?</h1>
         <p>
           Phishy's functionality can be accessed through a REST API. Consult our documentation if you'd 
-          like to get started. If you run into an issues, you can report them on our GitHub. You can also
+          like to get started. If you run into any issues, you can report them on our GitHub. You can also
           use our Advance Results API to get insights into what tests a given website passed or failed. 
-          As we continue development, we intend on adding more comprehensive API's to Phishy.
+          As we continue development, we intend on adding more comprehensive APIs to Phishy.
         </p>
       </p>
       <p>
@@ -104,7 +100,7 @@
         <p>
           In order to achieve our promising results we had to build custom feature extraction tools. These features were then
           used for binary classification using an SVM model trained on similar data from UC Irvine's ML Repository.
-          In addition to phishing detection, this data can be used for other application. To serve this purpose,
+          In addition to phishing detection, this data can be used for other applications. To serve this purpose,
           all the feature extraction results can be accessed through the Advance Results API. We have also detailed all the 
           features we used for Phishy on our GitHub page.
         </p>

@@ -7,19 +7,19 @@ from src.extract import extractAllFeatures
 import csv
 import time
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__,static_folder='static',
+            template_folder='templates')
 app.config["DEBUG"] = True
 
 model = pickle.load(open('../models/final_model.pkl', 'rb'))
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
-    result = {
-    'working': True}
+    return render_template('index.html')
 
-    toReturn = jsonify(result)
-    toReturn.headers.add('Access-Control-Allow-Origin', '*')
-    return toReturn
+@app.route('/api')
+def api():
+    return render_template('API.html')
 
 @app.route('/status/', methods=['GET'])
 def status():

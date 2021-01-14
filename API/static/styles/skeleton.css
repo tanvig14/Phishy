@@ -418,6 +418,7 @@ hr {
     background-color: rgba(0, 0, 0, 0.603);  
     backdrop-filter: blur(4px); 
     text-align: center;
+    padding: 2em 0;
     margin-bottom: 5em;
   }
   .header_1 a{
