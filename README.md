@@ -64,7 +64,7 @@ Once you have the appropriate driver for your operating system and web browser, 
 
 **Note:** All our testing was done on MacOS Big Sur with Chrome 87
 
-### 3. Running Phisy
+### 3. Running Phishy
 
 From the repo on your computer, go to `API` and run:
 
